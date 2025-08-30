@@ -1,4 +1,4 @@
-# 🌐 Micrositio Web par Peliculas con API REST
+# 🌐 Micrositio Web par Musica con API REST
 
 ## 🎯 Objetivo del Proyecto
 El objetivo de este proyecto es que los estudiantes, aplicando los conocimientos adquiridos durante el curso, sean capaces de diseñar y desarrollar un **micrositio web completo** que combine tanto el **backend basado en servicios API REST**, como un **frontend funcional y bien estructurado**.  
