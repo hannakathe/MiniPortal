@@ -39,6 +39,53 @@ Cada micrositio personal deberá estar dividido en **5 secciones principales**:
 
 ---
 
+## Estructura del proyecto
+```
+mini_portal_musica
+├── .gitignore
+├── 📂backend
+│   ├── 📜README.md
+│   ├── 📂app
+│   │   ├── __pycache__
+│   │   ├── crud.py
+│   │   ├── database.py
+│   │   ├── main.py
+│   │   ├── models.py
+│   │   ├── 📂routers
+│   │   │   ├── __pycache__
+│   │   │   ├── contact.py
+│   │   │   ├── profile.py
+│   │   │   ├── recommendations.py
+│   │   │   └── songs.py
+│   │   ├── schemas.py
+│   │   ├── seed.py
+│   │   └── 📂utils
+│   │       ├── __pycache__
+│   │       └── recommender.py
+│   └── songs.db
+├── 📂docs
+│   ├── Proyecto-corte1_Micrositio_API_REST.pdf
+│   └── 📂screenshots
+├── 📂frontend
+│   ├── 📜README.md
+│   ├── 📂assets
+│   │   ├── 📂css
+│   │   ├── 📂img
+│   │   └── 📂js
+│   │       ├── app.js
+│   │       ├── catalog.js
+│   │       └── detail.js
+│   ├── catalog.html
+│   ├── contact.html
+│   ├── detail.html
+│   └── index.html
+├── requirements.txt
+├── 📜README.md
+└── 📂venv
+```
+
+---
+
 ## 🛠️ Tecnologías Utilizadas
 - **Frontend:** HTML5, CSS3, JavaScript (fetch API)  
 - **Backend:** Node.js con Express / u otro framework equivalente  
