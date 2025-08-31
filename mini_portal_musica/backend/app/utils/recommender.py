@@ -6,6 +6,12 @@ import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+
+
+# Función básica por género
+def get_recommendations(db: Session, genre: str, limit: int = 5):
+    return db.query(Song).filter(Song.genre == genre).limit(limit).all()
+
 def get_recommendations_ai(db: Session, song_id: int, top_n: int = 5):
     """
     Retorna canciones similares a una canción dada usando IA (TF-IDF + similitud coseno).
