@@ -6,7 +6,7 @@ from .. import models, schemas, database
 
 router = APIRouter(
     prefix="/api/songs",
-    tags=["songs"]
+    tags=["Songs"]
 )
 
 # Dependencia DB
@@ -48,3 +48,5 @@ def delete_song(song_id: int, db: Session = Depends(get_db)):
     db.delete(song)
     db.commit()
     return {"ok": True, "message": "Canción eliminada"}
+
+
