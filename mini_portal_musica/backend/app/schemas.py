@@ -1,7 +1,13 @@
 from pydantic import BaseModel
 from datetime import date
+from pydantic import BaseModel, EmailStr
+
 
 # Base común (campos que pueden recibirse/enviarse)
+
+# ------------------------------
+# Songs
+# ------------------------------
 class SongBase(BaseModel):
     title: str
     artist: str
@@ -24,4 +30,29 @@ class Song(SongBase):
     id: int
 
     class Config:
-        orm_mode = True   # <- Esto permite a Pydantic leer objetos de SQLAlchemy
+        from_attributes = True   # <- Esto permite a Pydanticv2 leer objetos de SQLAlchemy
+
+
+
+# ------------------------------
+# Perfil del estudiante (Yo)
+# ------------------------------
+class Profile(BaseModel):
+    id: int
+    nombre: str
+    carrera: str
+    universidad: str
+    email: EmailStr
+    descripcion: str
+
+    class Config:
+        from_attributes = True
+
+
+# ------------------------------
+# Contacto (formulario)
+# ------------------------------
+class Contact(BaseModel):
+    nombre: str
+    email: EmailStr
+    mensaje: str

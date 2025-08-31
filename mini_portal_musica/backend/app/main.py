@@ -7,9 +7,11 @@ Aquí arrancamos la app, registramos routers (por ejemplo songs.py) y configuram
 
 
 from fastapi import FastAPI
-from app.routers import songs
+from .routers import songs, profile, contact
 
 app = FastAPI(title="Micrositio Musical 🎶")
 
 # incluir router
 app.include_router(songs.router)
+app.include_router(profile.router)
+app.include_router(contact.router)
