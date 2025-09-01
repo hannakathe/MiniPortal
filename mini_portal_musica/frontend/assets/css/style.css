@@ -8,19 +8,12 @@
     font-family: 'Arial', sans-serif;
 }
 
-
-.inter-custom {
-  font-family: "Inter", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-body {
+#home, #about, #projects, #skills, #contact {
     background-color: #1f1f1f;
     color: #fff;
     scroll-behavior: smooth;
 }
+
 
 /* ---------------------------- */
 /* Navbar                       */
@@ -44,6 +37,7 @@ body {
 }
 
 .navbar ul li a {
+    font-family: "Inter", sans-serif;
     color: #fff;
     text-decoration: none;
     font-weight: 500;
@@ -55,87 +49,9 @@ body {
 }
 
 /* ---------------------------- */
-/* Header / Hero                */
-/* ---------------------------- */
-header#home {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 50px;
-    min-height: 100vh;
-    padding: 0 50px;
-}
-
-header#home img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px;
-}
-
-header#home h1 {
-    font-size: 4rem;
-    margin-bottom: 20px;
-}
-
-header#home h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: #ccc;
-    margin-bottom: 30px;
-}
-
-header#home .buttons {
-    display: flex;
-    gap: 15px;
-}
-
-header#home .buttons button {
-    padding: 10px 25px;
-    font-weight: 600;
-    cursor: pointer;
-    border: none;
-    transition: 0.3s;
-}
-
-header#home .buttons .explore {
-    background-color: #fff;
-    color: #000;
-}
-
-header#home .buttons .explore:hover {
-    background-color: #00bfff;
-    color: #fff;
-}
-
-header#home .buttons .play {
-    background: transparent;
-    color: #fff;
-    border: 2px solid #fff;
-}
-
-header#home .buttons .play:hover {
-    border-color: #00bfff;
-    color: #00bfff;
-}
-
-/* ---------------------------- */
 /* Responsive                   */
 /* ---------------------------- */
 @media (max-width: 768px) {
-    header#home {
-        grid-template-columns: 1fr;
-        text-align: center;
-        gap: 20px;
-        padding: 0 20px;
-    }
-
-    header#home img {
-        width: 70%;
-        margin: 0 auto;
-    }
-
     .navbar {
         justify-content: center;
     }

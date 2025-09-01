@@ -1,8 +1,8 @@
 /* ------------------ */
-/* Home / Header      */
+/* Home / section      */
 /* ------------------ */
 
-header#home {
+section#home {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
@@ -12,9 +12,10 @@ header#home {
     justify-content: center;
 }
 
-header#home img {
+
+section#home img {
     width: auto;
-    height: 51vw;
+    height: 50vw;
     display: block;
     margin: 0 ;
     object-fit: cover;
@@ -42,12 +43,14 @@ header#home img {
 
 
 
-header#home h1 {
+section#home h1 {
+    font-family: "Inter", sans-serif;
     font-size: 7rem;
-    margin-bottom: 70px;
+    margin-bottom: 100px;
 }
 
-header#home h2 {
+section#home h2 {
+    font-family: "Inter", sans-serif;
     font-size: 2rem;
     font-weight: 400;
     color: #ccc;
@@ -89,8 +92,8 @@ header#home h2 {
 }
 
 
-/* Botones del header */
-header#home .buttons {
+/* Botones del section */
+section#home .buttons {
     margin-top: 20px;
 }
 
@@ -128,13 +131,13 @@ button.play:hover {
 /* Responsive Home     */
 /* ------------------ */
 @media (max-width: 768px) {
-    header#home {
+    section#home {
         grid-template-columns: 1fr;
         text-align: center;
         gap: 20px;
     }
 
-    header#home img {
+    section#home img {
         width: 70%;
         margin: 0 auto;
     }
