@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const sections = [
         {id: 'home-container', file: 'assets/pages/home.html'},
         {id: 'about-container', file: 'assets/pages/about_me.html'},
-        {id: 'projects-container', file: 'assets/pages/projects.html'},
-        {id: 'skills-container', file: 'assets/pages/skills.html'},
+        {id: 'projects-container', file: 'assets/pages/projects_intro.html'},
+        {id: 'skills-container', file: 'assets/pages/skills_intro.html'},
         {id: 'contact-container', file: 'assets/pages/contact.html'}
     ];
 
