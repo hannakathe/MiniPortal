@@ -1,1 +1,151 @@
-<!-- Página principal (presentación, bienvenida, perfil del estudiante). -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Portafolio Hanna Abril</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/about_me.css">
+    <link rel="stylesheet" href="assets/css/projects.css">
+    <link rel="stylesheet" href="assets/css/skills.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Home / Header -->
+    <header id="home">
+        <img class="foto_perfil" src="assets/img/foto_perfil.jpg" alt="Hanna Abril">
+        <div>
+            <h1 class="name">Hannah K. Abril</h1>
+            <h2>Estudiante de Ingeniería de Software</h2>
+         </div>
+        
+    </header>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About Me</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Hard Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- About Me -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Hola, soy Hanna Abril, estudiante de Ingeniería de Software con experiencia en desarrollo web y proyectos tecnológicos. Me interesa la educación financiera y la creación de aplicaciones interactivas y dinámicas.</p>
+    </section>
+
+    <!-- Projects Intro -->
+    <section id="projects">
+        <h2>Proyectos</h2>
+        <ul>
+            <li><a href="projects/musical.html">Proyecto 1: Micrositio Musical</a></li>
+            <li><a href="projects/proyecto2.html">Proyecto 2</a></li>
+            <li><a href="projects/proyecto3.html">Proyecto 3</a></li>
+        </ul>
+    </section>
+
+    <!-- Hard Skills Intro -->
+    <section id="skills">
+  <div class="container">
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>HTML</h2>
+        <a href="skills/html.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>CSS</h2>
+        <a href="skills/css.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>JavaScript</h2>
+        <a href="skills/js.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>Python</h2>
+        <a href="skills/python.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>MicroPython</h2>
+        <a href="skills/micropython.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>SQL</h2>
+        <a href="skills/sql.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>Git</h2>
+        <a href="skills/git.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>Microsoft Tools</h2>
+        <a href="skills/microsoft.html">Ver más</a>
+      </div>
+    </div>
+
+    <div class="box">
+      <span></span>
+      <div class="content">
+        <h2>Otros</h2>
+        <a href="skills/otros.html">Ver más</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2>Contacto</h2>
+        <form id="contactForm">
+            <input type="text" name="name" placeholder="Tu nombre" required>
+            <input type="email" name="email" placeholder="Tu correo" required>
+            <textarea name="message" placeholder="Escribe tu mensaje" required></textarea>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hanna Abril. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

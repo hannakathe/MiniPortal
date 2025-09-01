@@ -66,19 +66,29 @@ mini_portal_musica
 ├── 📂docs
 │   ├── Proyecto-corte1_Micrositio_API_REST.pdf
 │   └── 📂screenshots
-├── 📂frontend
-│   ├── 📜README.md
-│   ├── 📂assets
-│   │   ├── 📂css
-│   │   ├── 📂img
-│   │   └── 📂js
-│   │       ├── app.js
-│   │       ├── catalog.js
-│   │       └── detail.js
-│   ├── catalog.html
-│   ├── contact.html
-│   ├── detail.html
-│   └── index.html
+📂frontend/
+├── README.md
+├── 📂assets/
+│   ├── 📂css/
+│   │   └── style.css          # Estilos globales
+│   ├── 📂img/                   # Fotos, logos, screenshots de proyectos
+│   │   ├── perfil.png
+│   │   ├── micrositio.png
+│   │   └── otros_proyectos.png
+│   └── 📂js/
+│       ├── app.js             # Funciones globales
+│       ├── portfolio.js       # Funciones de home y proyectos
+│       ├── catalog.js         # Funciones específicas del catálogo musical
+│       └── detail.js          # Funciones de detalle de canción
+├── index.html                 # Home / Portafolio
+├── 📂projects/
+│   ├── micrositio.html        # Página del micrositio musical
+│   └── otros_proyectos.html   # Página con descripción de otros proyectos
+├── 📂skills/
+│   └── index.html             # Página de skills técnicos
+├── contact.html               # Formulario de contacto
+├── catalog.html               # Catálogo de canciones del proyecto musical
+└── detail.html                # Detalle de canción
 ├── requirements.txt
 ├── 📜README.md
 └── 📂venv
