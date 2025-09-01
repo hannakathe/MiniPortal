@@ -3,17 +3,22 @@
 /* ------------------ */
 #projects {
     min-height: 100vh;
-    padding: 100px 50px 50px 50px;
-    background-color: var(--background-section, #D2DBDD); /* definido en style.css */
+    font-family: "Inter", sans-serif; /* Fuente global para la sección */
 }
 
 /* Título de la sección */
-#projects h2 {
-    font-size: 3rem;
-    margin-bottom: 50px;
+#projects h3 {
+    font-family: "Inter", sans-serif;
+    font-size: 2rem;
+    margin:auto;
     text-align: center;
-    color: var(--text-dark, #333);
-    font-family: 'Roboto Slab', serif;
+}
+#projects h1 {
+    font-family: "Inter", sans-serif;
+    font-size: 5rem;
+    margin-bottom: 80px;
+    padding-top: 160px;
+    text-align: center;
 }
 
 /* Contenedor de las tarjetas */
@@ -21,16 +26,18 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 25px;
-    max-width: 1200px;
+    flex-wrap: nowrap; /* mantener las tarjetas en una fila */
+    gap: 60px; /* aumento de la separación horizontal */
+    max-width: 1800px; /* suficiente espacio para 3 tarjetas de 500px + gaps */
     margin: 0 auto;
 }
+
 
 /* Tarjeta */
 .card {
     position: relative;
-    width: 300px;
+    width: 500px; /* ancho fijo */
+    height: 500px; /* altura fija */
     border-radius: 12px;
     overflow: hidden;
     background-color: var(--card-bg, #fff);
@@ -39,6 +46,30 @@
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0, 1);
     cursor: pointer;
 }
+
+/* Responsive para pantallas más pequeñas */
+@media (max-width: 1600px) {
+    .cards {
+        flex-wrap: wrap; /* permiten bajar tarjetas si no caben */
+        justify-content: center;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .card {
+        width: 45%; /* se ajusta el ancho para tablets */
+        height: auto; /* altura automática para mantener proporción */
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        width: 90%; /* tarjetas casi de ancho completo en móviles */
+        height: auto;
+    }
+}
+
 
 /* Hover de la tarjeta */
 .card:hover {
@@ -50,7 +81,7 @@
 .card__img,
 .card__img--hover {
     width: 100%;
-    height: 235px;
+    height: 350px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -72,22 +103,17 @@
     background-color: var(--card-bg, #fff);
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    padding: 16px 24px 24px 24px;
+    padding: 40px 45px 45px 45px;
+    font-family: "Inter", sans-serif;
 }
 
-.card__category {
-    font-family: 'Raleway', sans-serif;
-    text-transform: uppercase;
-    font-size: 13px;
-    letter-spacing: 2px;
-    font-weight: 500;
-    color: var(--text-muted, #868686);
-}
+
+
 
 .card__title {
     margin-top: 5px;
     margin-bottom: 10px;
-    font-family: 'Roboto Slab', serif;
+    font-family: "Inter", sans-serif;
     color: var(--text-dark, #333);
 }
 
@@ -99,6 +125,7 @@
     padding: 16px;
     opacity: 0;
     transition: opacity 0.3s ease;
+    font-family: "Inter", sans-serif;
 }
 
 /* Hover efecto imagen y info */
@@ -123,6 +150,19 @@
     text-decoration: none;
 }
 
+/* Hover efecto: la imagen principal desaparece */
+.card:hover .card__img {
+    opacity: 0; /* Oculta la imagen principal */
+    transition: opacity 0.3s ease;
+}
+
+/* Mantener la imagen hover visible */
+.card:hover .card__img--hover {
+    opacity: 0.3;
+    height: 100%;
+    transition: opacity 0.3s ease, height 0.3s ease;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
     .cards {
@@ -145,6 +185,7 @@
         width: 90%;
     }
 }
+
 /* Hover efecto: la imagen principal desaparece */
 .card:hover .card__img {
     opacity: 0; /* Oculta la imagen principal */
