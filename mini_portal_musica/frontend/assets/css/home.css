@@ -1,26 +1,27 @@
 /* ------------------ */
-/* Home / section      */
+/* Home / section     */
 /* ------------------ */
 
 section#home {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    display: flex;              /* imagen a la izquierda, texto a la derecha */
+    flex-direction: row;
     align-items: center;
-    gap: 0px;
     height: 100vh;
     padding: 0;
-    justify-content: center;
+    margin: 0;
 }
 
-
+/* Imagen */
 section#home img {
-    width: auto;
-    height: 50vw;
-    display: block;
-    margin: 0 ;
+    flex: 1;
+    width: 100%;
+    height: 90vh;
     object-fit: cover;
+    margin: 0;
+    padding: 0;
+    align-self: start;
+    display: block;
 
-    /* Difuminado suave y amplio a la derecha */
     -webkit-mask-image: linear-gradient(to right, 
                                         rgba(0,0,0,1) 40%, 
                                         rgba(0,0,0,0.8) 60%, 
@@ -40,13 +41,19 @@ section#home img {
     mask-size: cover;
 }
 
+/* Contenedor de texto */
+section#home .home-text {
+    flex: 1;
+    margin: 0 80px;   /* 👈 margen lateral para que no quede pegado */
+    color: #fff;
+}
 
-
-
+/* Títulos */
 section#home h1 {
     font-family: "Inter", sans-serif;
     font-size: 7rem;
-    margin-bottom: 100px;
+    margin-bottom: 40px;
+    line-height: 1.1;
 }
 
 section#home h2 {
@@ -56,14 +63,16 @@ section#home h2 {
     color: #ccc;
 }
 
-/* Hover nombre con animación automática cada 1 minuto */
+/* ------------------ */
+/* Animación nombre   */
+/* ------------------ */
+
 .name {
     position: relative;
     display: inline-block;
     cursor: pointer;
 }
 
-/* Línea animada una sola vez */
 .name::after {
     content: "";
     position: absolute;
@@ -72,38 +81,35 @@ section#home h2 {
     width: 0;
     height: 2px;
     background-color: #00bfff;
-    animation: underlineOnce 5s ease forwards; /* solo una vez */
+    animation: underlineOnce 5s ease forwards;
 }
 
-/* Animación keyframes */
 @keyframes underlineOnce {
-    from {
-        width: 0;
-    }
-    to {
-        width: 100%;
-    }
+    from { width: 0; }
+    to { width: 100%; }
 }
 
-/* Hover normal sigue funcionando */
 .name:hover::after {
     width: 100%;
     transition: width 0.3s ease;
 }
 
-
-/* Botones del section */
+/* Botones */
 section#home .buttons {
     margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; /* 👈 alineados con el texto */
+    gap: 15px;
 }
 
 button, .btn {
     padding: 10px 25px;
-    margin-right: 15px;
     border: none;
     cursor: pointer;
     font-weight: 600;
     transition: 0.3s;
+    border-radius: 5px;
 }
 
 button.explore {
@@ -128,17 +134,61 @@ button.play:hover {
 }
 
 /* ------------------ */
-/* Responsive Home     */
+/* Responsive ajustes */
 /* ------------------ */
+@media (max-width: 1024px) {
+    section#home h1 { font-size: 5rem; }
+    section#home h2 { font-size: 1.6rem; }
+    section#home .home-text { margin: 0 40px; } /* margen más reducido */
+}
+
 @media (max-width: 768px) {
     section#home {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         text-align: center;
-        gap: 20px;
+        gap: 30px;
+        height: auto;
+        padding: 40px 20px;
     }
 
     section#home img {
-        width: 70%;
-        margin: 0 auto;
+        width: 80%;
+        max-width: 350px;
+        height: auto;
+    }
+
+    section#home .home-text {
+        margin: 0 20px; /* margen adaptado */
+    }
+
+    section#home h1 {
+    font-family: "Inter", sans-serif;
+    font-size: 7rem;
+    margin-bottom: 40px;
+    line-height: 1.1;
+    margin-top: -10px; /* 👈 lo sube un poco */
+}
+
+
+    section#home h2 { font-size: 1.4rem; }
+}
+
+@media (max-width: 480px) {
+    section#home h1 { font-size: 2.5rem; }
+    section#home h2 { font-size: 1rem; }
+
+    section#home img {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    section#home .buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    button, .btn {
+        width: 100%;
+        max-width: 250px;
     }
 }

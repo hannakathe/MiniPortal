@@ -1,68 +1,146 @@
-/* ---------------------------- */
-/* Reset y estilo base general  */
-/* ---------------------------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Arial', sans-serif;
+/* ===== Base / variables ===== */
+:root { --nav-h: 80px; }
+
+* { margin:0; padding:0; box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+body {
+  margin:0;
+  background:#1f1f1f;
+  color:#fff;
+  /* evita que el navbar fijo tape el contenido */
+  padding-top: var(--nav-h);
+  overflow-x:hidden;
 }
 
-#home, #about, #projects, #skills, #contact {
-    background-color: #1f1f1f;
-    color: #fff;
-    scroll-behavior: smooth;
+section { scroll-margin-top: calc(var(--nav-h) + 12px); }
+
+/* ===== Navbar ===== */
+.navbar{
+  position:fixed; top:0; left:0; right:0;
+  height:var(--nav-h);
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 clamp(16px,5vw,48px);
+  background:#2b2b2b;
+  z-index:1000;
 }
 
-
-/* ---------------------------- */
-/* Navbar                       */
-/* ---------------------------- */
-.navbar {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 80px;
-    padding: 20px 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: #2b2b2b;
-    z-index: 1000;
+/* brand */
+.navbar .brand{
+  color:#fff; text-decoration:none; font-weight:700;
+  font-family:"Inter",sans-serif; letter-spacing:.2px;
 }
 
-.navbar ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
+/* toggle (checkbox + icon) */
+.nav-toggle{ display:none; }
+
+.hamburger{ display:none; width:32px; height:24px; position:relative; cursor:pointer; }
+.hamburger span{
+  position:absolute; left:0; right:0; height:3px; background:#fff; border-radius:2px;
+  transition:transform .3s ease, top .3s ease, opacity .2s ease;
+}
+.hamburger span:nth-child(1){ top:0; }
+.hamburger span:nth-child(2){ top:10px; }
+.hamburger span:nth-child(3){ top:20px; }
+
+.nav-toggle:checked + .hamburger span:nth-child(1){ top:10px; transform:rotate(45deg); }
+.nav-toggle:checked + .hamburger span:nth-child(2){ opacity:0; }
+.nav-toggle:checked + .hamburger span:nth-child(3){ top:10px; transform:rotate(-45deg); }
+
+/* menu */
+.nav-menu{
+  list-style:none; display:flex; gap: clamp(16px,3vw,32px);
+  align-items:center; margin:0; padding:0;
+}
+.nav-menu a{
+  color:#fff; text-decoration:none; font-family:"Inter",sans-serif; font-weight:500;
+  transition:color .2s ease;
+}
+.nav-menu a:hover{ color:#00bfff; }
+
+/* ===== Navbar responsive ===== */
+@media (max-width: 900px){
+  .hamburger{ display:block; }
+  .nav-menu{
+    position:fixed; top:var(--nav-h); left:0; right:0;
+    background:#2b2b2b;
+    flex-direction:column; gap:20px; padding:30px 16px;
+    transform:translateY(-120%); transition:transform .3s ease;
+  }
+  .nav-toggle:checked ~ .nav-menu{ transform:translateY(0); }
 }
 
-.navbar ul li a {
-    font-family: "Inter", sans-serif;
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s;
+/* ===== About ===== */
+section#about{
+  display:grid; grid-template-columns:1fr 1fr; align-items:center;
+  gap: clamp(24px, 4vw, 64px);
+  padding: clamp(24px, 6vw, 64px);
+  min-height: 100svh; /* mejor que 100vh en móviles */
 }
 
-.navbar ul li a:hover {
-    color: #00bfff;
+/* columnas */
+#about-left, #about-right{
+  display:flex; flex-direction:column; justify-content:center;
+  align-items:flex-start;
 }
 
-/* ---------------------------- */
-/* Responsive                   */
-/* ---------------------------- */
-@media (max-width: 768px) {
-    .navbar {
-        justify-content: center;
-    }
+/* Título grande */
+#about-left h1{
+  font-family:"Inter",sans-serif;
+  font-size: clamp(2rem, 10vw, 5rem);
+  line-height:1.1;
+  margin: 0 0 16px 0;
+  text-align:left;
+  word-wrap:break-word; overflow-wrap:anywhere;
+}
 
-    .navbar ul {
-        flex-direction: column;
-        gap: 15px;
-    }
+/* Párrafos (Me y Portfolio) */
+#about-left p,
+.about-item p{
+  font-family:"Inter",sans-serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+  line-height:1.7;
+  margin:0 0 18px 0;
+  /* limita el ancho de línea y evita desbordes */
+  width: min(65ch, 100%);
+  word-wrap:break-word; overflow-wrap:anywhere;
+}
 
-    header#home .buttons {
-        justify-content: center;
-    }
+/* Bloque Me / Portfolio */
+#about-info{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: clamp(24px, 4vw, 60px);
+  width:100%;
+  margin-top: 28px;
+}
+
+.about-item h2{
+  font-family:"Inter",sans-serif;
+  font-size: clamp(1.25rem, 2.3vw, 2rem);
+  font-weight:500;
+  color:#ccc; margin:0 0 10px 0;
+}
+
+/* Imagen / carrusel */
+#about-right{ display:flex; justify-content:center; align-items:center; }
+#about-right img, .carousel{
+  width:100%; max-width:520px; height:auto; display:block; border-radius:10px;
+}
+.carousel{ position:relative; aspect-ratio:1/1; overflow:hidden; }
+.carousel-item{ position:absolute; inset:0; opacity:0; transition:opacity 1s ease; }
+.carousel-item.active{ opacity:1; }
+
+/* ===== About responsive ===== */
+@media (max-width: 1024px){
+  section#about{ grid-template-columns:1fr; text-align:center; }
+  #about-left, #about-right{ align-items:center; }
+  #about-left h1{ text-align:center; }
+}
+
+@media (max-width: 480px){
+  /* botones en ancho completo si los usas en about */
+  section#about button, section#about .btn{
+    width:100%; margin:10px 0; font-size:1rem;
+  }
 }
