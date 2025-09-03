@@ -21,18 +21,20 @@ section#about {
 
 #about-left h1 {
     font-size: clamp(2rem, 8vw, 5rem);
-    margin: 50px 0 20px 0;
-    text-align: center; /* en mobile quedará centrado */
+    margin: -90 0 0 0;   /* antes era 50px arriba → lo subimos */
+    text-align: center;
     word-wrap: break-word;
 }
 
-
-
 #about-left p {
     font-family: "Inter", sans-serif;
-    font-size: clamp(0.9rem, 1.2vw, 1rem);
-    line-height: 1.6;
-    margin-bottom: 20px;
+    font-size: clamp(0.85rem, 1vw, 0.95rem);
+    line-height: 1.7;
+    margin: 10px 0 20px 0;   /* más cerca del título */
+    max-width: 700px;
+    text-align: justify;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #about-info {
@@ -52,8 +54,11 @@ section#about {
 }
 
 .about-item p {
-    font-size: clamp(0.85rem, 1vw, 1rem);
-    line-height: 1.5;
+    font-size: clamp(0.95rem, 1.2vw, 1.05rem);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: justify;
 }
 
 /* Botones */
@@ -107,6 +112,7 @@ button.play:hover {
     object-fit: cover;
     margin: 0 auto;
     border-radius: 10px;
+    display: block; /* asegura que la imagen se centre */
 }
 
 /* Carrusel */
@@ -153,8 +159,9 @@ button.play:hover {
         text-align: center;
     }
 
-    #about-info {
-        gap: 40px;
+    #about-left p, 
+    .about-item p {
+        text-align: center;
     }
 }
 
@@ -174,14 +181,13 @@ button.play:hover {
     }
 
     #about-left p,
-.about-item p {
-    max-width: 100%;         /* nunca más ancho que el contenedor */
-    font-size: clamp(0.9rem, 2.5vw, 1rem);
-    line-height: 1.6;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-}
-
+    .about-item p {
+        max-width: 95%;
+        font-size: clamp(0.95rem, 2.5vw, 1rem);
+        line-height: 1.6;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
 
     section#about button, section#about .btn {
         width: 100%;   /* botones ocupan todo el ancho */
