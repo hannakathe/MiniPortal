@@ -1,15 +1,24 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
 from .. import schemas
+from ..database_contact import get_db_contact
+from ..models_contact import Contact
 
 router = APIRouter(
     prefix="/api/contact",
-    tags=["Contact"]
+    tags=["contact"]
 )
 
-# Guardamos los mensajes de contacto en memoria temporalmente
-contacts_db = []
+@router.post("/")
+def create_contact(contact: schemas.ContactCreate, db: Session = Depends(get_db_contact)):
+    new_contact = Contact(**contact.dict())
+    db.add(new_contact)
+    db.commit()
+    db.refresh(new_contact)
+    return {"ok": True, "message": "Contacto guardado", "data": new_contact}
 
-@router.post("/", response_model=schemas.Contact)
-def send_contact(contact: schemas.Contact):
-    contacts_db.append(contact.dict())
-    return contact
+
+@router.get("/")
+def get_contacts(db: Session = Depends(get_db_contact)):
+    contacts = db.query(Contact).all()
+    return {"ok": True, "data": contacts}

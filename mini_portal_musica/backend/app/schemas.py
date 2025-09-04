@@ -52,7 +52,19 @@ class Profile(BaseModel):
 # ------------------------------
 # Contacto (formulario)
 # ------------------------------
-class Contact(BaseModel):
+from pydantic import BaseModel, EmailStr
+
+class ContactBase(BaseModel):
     nombre: str
     email: EmailStr
     mensaje: str
+
+class ContactCreate(ContactBase):
+    pass
+
+class Contact(ContactBase):
+    id: int
+
+    class Config:
+        from_attributes = True
+

@@ -9,7 +9,9 @@ Aquí arrancamos la app, registramos routers (por ejemplo songs.py) y configuram
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from .routers import songs, profile, contact, recommendations
+from . import models_contact, database_contact  # Importar modelos y base de datos de contactos
 
+models_contact.BaseContact.metadata.create_all(bind=database_contact.engine)  # Crear tablas de contactos
 app = FastAPI(title="Micrositio Musical 🎶")
 
 # 🔥 Configuración de CORS
