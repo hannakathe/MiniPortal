@@ -20,8 +20,8 @@ section#about {
 }
 
 #about-left h1 {
+    font-family: "Inter", sans-serif;
     font-size: clamp(2rem, 8vw, 5rem);
-    margin: -90 0 0 0;   /* antes era 50px arriba → lo subimos */
     text-align: center;
     word-wrap: break-word;
 }
@@ -102,28 +102,30 @@ button.play:hover {
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin: 0;
-    padding: 0;
+
 }
 
-#about-right img, .carousel {
+#about-right img, 
+.carousel {
     width: 100%;
     max-width: 500px;
+    height: auto;
     object-fit: cover;
-    margin: 0 auto;
+    object-position: center; /* centrado horizontal y vertical */
     border-radius: 10px;
-    display: block; /* asegura que la imagen se centre */
+    display: block;
+    margin: 0 auto; 
 }
+
 
 /* Carrusel */
 .carousel {
     position: relative;
     width: 100%;
-    aspect-ratio: 1/1;
-    cursor: pointer;
+    max-width: 500px;
+    aspect-ratio: 1/1;   /* mantiene el cuadro cuadrado */
     overflow: hidden;
     border-radius: 10px;
-    max-width: 500px;
 }
 
 .carousel-item {
@@ -131,10 +133,10 @@ button.play:hover {
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover;       /* llena el espacio sin distorsionarse */
+    object-position: center center; /* centra la imagen dentro del cuadro */
     opacity: 0;
     transition: opacity 1s ease-in-out;
-    z-index: 0;
 }
 
 .carousel-item.active {
@@ -170,9 +172,18 @@ button.play:hover {
         font-size: clamp(2rem, 6vw, 3rem);
     }
 
-    #about-right img, .carousel {
-        max-width: 80%;
-    }
+    #about-right img, 
+.carousel {
+    width: 100%;
+    max-width: 400px;       /* tamaño fijo máximo */
+    height: auto;           /* mantiene proporción */
+    object-fit: contain;    /* se adapta sin recortarse */
+    margin: 0 auto;
+    border-radius: 10px;
+    display: block;
+    background-color: #000; /* opcional, relleno detrás de la imagen */
+}
+
 }
 
 @media (max-width: 480px) {
