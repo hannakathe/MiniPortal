@@ -7,9 +7,20 @@ Aquí arrancamos la app, registramos routers (por ejemplo songs.py) y configuram
 
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from .routers import songs, profile, contact, recommendations
 
 app = FastAPI(title="Micrositio Musical 🎶")
+
+# 🔥 Configuración de CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # O reemplaza "*" por ["http://127.0.0.1:5500"] si usas Live Server
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 # incluir router
 app.include_router(songs.router)

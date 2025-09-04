@@ -1,0 +1,67 @@
+/* ===== Contact Section ===== */
+#contact {
+  padding: 80px 20px;
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  font-family: "Inter", sans-serif;
+}
+
+#contact h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #00bfff;
+}
+
+#contact form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#contact input,
+#contact textarea {
+  padding: 12px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  background: #2b2b2b;
+  color: #fff;
+  outline: none;
+  transition: border 0.3s ease;
+}
+
+#contact input:focus,
+#contact textarea:focus {
+  border: 2px solid #00bfff;
+}
+
+#contact textarea {
+  resize: none;
+  min-height: 120px;
+}
+
+#contact button {
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  background: #00bfff;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#contact button:hover {
+  background: #008fcc;
+}
+
+/* Mensajes */
+#contact .message {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+#contact .success { color: #4caf50; }
+#contact .error { color: #ff5252; }
