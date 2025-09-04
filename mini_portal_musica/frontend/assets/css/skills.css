@@ -1,168 +1,234 @@
 /* ===== Hard Skills Section ===== */
 #skills {
-  padding: 100px 50px;
-  min-height: 100vh;
-  background-color: #1f1f1f;
-  color: #fff;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 50px 8%;
+    min-height: 100vh;
+    background-color: #1f1f1f;
+    color: #fff;
 }
 
 #skills h2 {
-  font-size: 3rem;
-  margin-bottom: 30px;
-  text-align: center;
-  font-family: "Inter", sans-serif;
+    font-size: 3rem;
+    margin-bottom: 30px;
+    text-align: center;
+    font-family: "Inter", sans-serif;
 }
 
 /* Contenedor de las cards */
 #skills .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 40px 0;
-  gap: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 40px 0;
+    gap: 30px;
 }
 
-/* Cada card */
+/* Cada card cuadrada */
 #skills .container .box {
-  position: relative;
-  width: 320px;
-  height: 400px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.5s;
+    position: relative;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
 }
 
 /* Pseudo-elementos para gradiente y animación */
 #skills .container .box::before,
 #skills .container .box::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 50px;
-  width: 50%;
-  height: 100%;
-  border-radius: 8px;
-  transform: skewX(15deg);
-  transition: 0.5s;
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 40px;
+    width: 50%;
+    height: 100%;
+    border-radius: 8px;
+    transform: skewX(15deg);
+    transition: 0.5s;
 }
 
-#skills .container .box::after { filter: blur(30px); }
+#skills .container .box::after {
+    filter: blur(20px);
+}
 
 #skills .container .box:hover::before,
 #skills .container .box:hover::after {
-  transform: skewX(0deg);
-  left: 20px;
-  width: calc(100% - 90px);
+    transform: skewX(0deg);
+    left: 10px;
+    width: calc(100% - 50px);
 }
 
 /* Gradientes por tarjeta */
 #skills .container .box:nth-child(1)::before,
-#skills .container .box:nth-child(1)::after { background: linear-gradient(315deg, #ffbc00, #ff0058); }
+#skills .container .box:nth-child(1)::after {
+    background: linear-gradient(315deg, #ffbc00, #ff0058);
+}
+
 #skills .container .box:nth-child(2)::before,
-#skills .container .box:nth-child(2)::after { background: linear-gradient(315deg, #03a9f4, #ff0058); }
+#skills .container .box:nth-child(2)::after {
+    background: linear-gradient(315deg, #03a9f4, #ff0058);
+}
+
 #skills .container .box:nth-child(3)::before,
-#skills .container .box:nth-child(3)::after { background: linear-gradient(315deg, #4dff03, #00d0ff); }
+#skills .container .box:nth-child(3)::after {
+    background: linear-gradient(315deg, #4dff03, #00d0ff);
+}
+
 #skills .container .box:nth-child(4)::before,
-#skills .container .box:nth-child(4)::after { background: linear-gradient(315deg, #ff7f50, #ff1493); }
+#skills .container .box:nth-child(4)::after {
+    background: linear-gradient(315deg, #ff7f50, #ff1493);
+}
+
 #skills .container .box:nth-child(5)::before,
-#skills .container .box:nth-child(5)::after { background: linear-gradient(315deg, #00ffcc, #0066ff); }
+#skills .container .box:nth-child(5)::after {
+    background: linear-gradient(315deg, #00ffcc, #0066ff);
+}
+
 #skills .container .box:nth-child(6)::before,
-#skills .container .box:nth-child(6)::after { background: linear-gradient(315deg, #ff4500, #ff69b4); }
+#skills .container .box:nth-child(6)::after {
+    background: linear-gradient(315deg, #ff4500, #ff69b4);
+}
+
 #skills .container .box:nth-child(7)::before,
-#skills .container .box:nth-child(7)::after { background: linear-gradient(315deg, #8a2be2, #7fff00); }
+#skills .container .box:nth-child(7)::after {
+    background: linear-gradient(315deg, #8a2be2, #7fff00);
+}
+
 #skills .container .box:nth-child(8)::before,
-#skills .container .box:nth-child(8)::after { background: linear-gradient(315deg, #00ff7f, #ff6347); }
+#skills .container .box:nth-child(8)::after {
+    background: linear-gradient(315deg, #00ff7f, #ff6347);
+}
+
 #skills .container .box:nth-child(9)::before,
-#skills .container .box:nth-child(9)::after { background: linear-gradient(315deg, #ff69b4, #1e90ff); }
+#skills .container .box:nth-child(9)::after {
+    background: linear-gradient(315deg, #ff69b4, #1e90ff);
+}
 
 /* Efectos animados de luces */
 #skills .container .box span {
-  display: block;
-  position: absolute;
-  top:0; left:0; right:0; bottom:0;
-  z-index:5;
-  pointer-events:none;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 5;
+    pointer-events: none;
 }
 
 #skills .container .box span::before,
 #skills .container .box span::after {
-  content:'';
-  position:absolute;
-  width:0; height:0;
-  border-radius:8px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(10px);
-  opacity:0;
-  animation: animate 2s ease-in-out infinite;
-  box-shadow:0 5px 15px rgba(0,0,0,0.08);
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    opacity: 0;
+    animation: animate 2s ease-in-out infinite;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
 }
 
-#skills .container .box span::after { animation-delay: -1s; }
+#skills .container .box span::after {
+    animation-delay: -1s;
+}
 
 #skills .container .box:hover span::before {
-  top:-50px; left:50px;
-  width:100px; height:100px;
-  opacity:1;
+    top: -40px;
+    left: 40px;
+    width: 80px;
+    height: 80px;
+    opacity: 1;
 }
 
 #skills .container .box:hover span::after {
-  bottom:-50px; right:50px;
-  width:100px; height:100px;
-  opacity:1;
+    bottom: -40px;
+    right: 40px;
+    width: 80px;
+    height: 80px;
+    opacity: 1;
 }
 
 @keyframes animate {
-  0%,100% { transform: translateY(10px); }
-  50% { transform: translate(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(8px);
+    }
+
+    50% {
+        transform: translate(-8px);
+    }
 }
 
 /* Contenido interno de la card */
 #skills .container .box .content {
-  position: relative;
-  left:0;
-  padding: 20px 40px;
-  background: rgba(255,255,255,0.05);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  border-radius:8px;
-  z-index:1;
-  color:#fff;
-  font-family:"Inter",sans-serif;
-  transition:0.5s;
+    position: relative;
+    left: 0;
+    padding: 15px 25px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    z-index: 1;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+    transition: 0.5s;
+    text-align: center;
 }
 
 #skills .container .box:hover .content {
-  left: -25px;
-  padding: 60px 40px;
+    left: -15px;
+    padding: 35px 25px;
 }
 
 #skills .container .box .content h2 {
-  font-size:2em;
-  margin-bottom:10px;
+    font-size: 1.5em;
+    margin-bottom: 10px;
 }
 
 #skills .container .box .content a {
-  display:inline-block;
-  font-size:1.1em;
-  color:#111;
-  background:#fff;
-  padding:10px;
-  border-radius:4px;
-  text-decoration:none;
-  font-weight:700;
-  margin-top:5px;
+    display: inline-block;
+    font-size: 1em;
+    color: #111;
+    background: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 700;
+    margin-top: 5px;
 }
 
 #skills .container .box .content a:hover {
-  background:#ffcf4d;
-  border:1px solid rgba(255,0,88,0.4);
-  box-shadow:0 1px 15px rgba(1,1,1,0.2);
+    background: #ffcf4d;
+    border: 1px solid rgba(255, 0, 88, 0.4);
+    box-shadow: 0 1px 15px rgba(1, 1, 1, 0.2);
 }
 
 /* Responsive */
 @media (max-width: 768px) {
-  #skills .container { flex-direction: column; padding: 20px; }
-  #skills .container .box { width: 90%; margin:20px 0; }
+    #skills .container {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    #skills .container .box {
+        width: 90%;
+        margin: 20px 0;
+        height: 250px;
+    }
+}
+
+/* Sección Hard Skills con H1 vertical */
+section#skills h1 {
+    font-family: "Inter", sans-serif;
+    font-size: 5rem;
+    margin-bottom: 0px;
+    line-height: 1.1;
 }
