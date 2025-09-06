@@ -6,6 +6,9 @@ El objetivo de este proyecto es que los estudiantes, aplicando los conocimientos
 El estudiante deberá crear su propia API para gestionar datos y consumirla desde el frontend mediante **JavaScript**, siguiendo buenas prácticas de desarrollo web moderno.  
 Este proyecto les permitirá entender la conexión real entre capas **frontend y backend**, además de fortalecer la habilidad para construir **interfaces dinámicas, integradas y con diseño profesional**.  
 
+**IMPORTANTE EJECUTAR ENTORNO VIRTUAL: source .venv/bin/activate**
+**RELOAD SERVER: uvicorn backend.app.main:app --reload**
+
 ---
 
 ## 📂 Caso de Uso
