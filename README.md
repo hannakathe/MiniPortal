@@ -7,7 +7,7 @@ El estudiante deberá crear su propia API para gestionar datos y consumirla desd
 Este proyecto les permitirá entender la conexión real entre capas **frontend y backend**, además de fortalecer la habilidad para construir **interfaces dinámicas, integradas y con diseño profesional**.  
 
 **IMPORTANTE EJECUTAR ENTORNO VIRTUAL: source .venv/bin/activate**
-**RELOAD SERVER: uvicorn backend.app.main:app --reload**
+**RELOAD SERVER: uvicorn app.main:app --reload**
 
 ---
 
