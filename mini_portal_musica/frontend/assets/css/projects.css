@@ -130,7 +130,7 @@
 
 /* Hover efecto imagen y info */
 .card:hover .card__img--hover {
-    opacity: 0.3;
+    opacity: 0.8;
     height: 100%;
 }
 

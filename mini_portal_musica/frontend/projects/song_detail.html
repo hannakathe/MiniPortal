@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles de la Canción</title>
+    <link rel="stylesheet" href="../assets/css/micrositio_musical.css">
+</head>
+<body>
+
+<div class="song-detail-container" id="song-detail">
+    <p>Cargando información...</p>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    const container = document.getElementById("song-detail");
+    const params = new URLSearchParams(window.location.search);
+    const songId = params.get("id");
+    const apiUrl = `http://127.0.0.1:8000/api/songs/${songId}`;
+
+    try {
+        const response = await fetch(apiUrl);
+        const song = await response.json();
+
+        container.innerHTML = `
+            <h1>${song.title}</h1>
+            <img src="${song.album_image || '../assets/img/coin_machine1.jpg'}" alt="${song.title}" style="width:300px; height:auto; border-radius:10px;">
+            <p><strong>Género:</strong> ${song.genre || 'Desconocido'}</p>
+            <p>${song.description || ''}</p>
+        `;
+    } catch (error) {
+        console.error("Error al cargar la canción:", error);
+        container.innerHTML = "<p>Error al cargar la canción.</p>";
+    }
+});
+</script>
+
+<!-- Chat flotante -->
+<div id="chat-float">
+  <div id="chat-header">🎵 Music Chat</div>
+  <div id="chat-body"></div>
+  <form id="chat-form">
+    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." required>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
+
+</body>
+</html>
