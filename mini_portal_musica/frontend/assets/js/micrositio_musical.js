@@ -1,109 +1,146 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const container = document.getElementById("cards-container");
-    const apiUrl = "http://127.0.0.1:8000/api/songs";
+document.addEventListener("DOMContentLoaded", async () => {
 
-    async function fetchSongs() {
+    const container = document.getElementById("song-detail");
+    const cardsContainer = document.getElementById("cards-container");
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatBody = document.getElementById('chat-body');
+
+    const params = new URLSearchParams(window.location.search);
+    const songId = params.get("id");
+
+    // === Función para mostrar los detalles de una canción ===
+    async function loadSongDetail(id) {
+        if (!id) {
+            container.innerHTML = "<p>No se especificó ninguna canción.</p>";
+            return;
+        }
+        const apiUrl = `http://127.0.0.1:8000/api/songs/${id}`;
+
         try {
             const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const song = await response.json();
+
+            container.innerHTML = `
+                <h1>${song.title || 'Desconocido'}</h1>
+                <img src="${song.album_image || '../assets/img/coin_machine1.jpg'}" alt="${song.title}" style="width:300px; height:auto; border-radius:10px;">
+                <p><strong>Artista:</strong> ${song.artist || 'Desconocido'}</p>
+                <p><strong>Género:</strong> ${song.genre || 'Desconocido'}</p>
+                <p><strong>Disquera:</strong> ${song.discografic || 'Desconocido'}</p>
+                <p><strong>Álbum:</strong> ${song.album || 'Desconocido'}</p>
+                <p><strong>País:</strong> ${song.country || 'Desconocido'}</p>
+                <p><strong>Fecha de lanzamiento:</strong> ${song.release_date || 'Desconocida'}</p>
+                <p><strong>Descripción:</strong> ${song.description || ''}</p>
+                <p><strong>Letras:</strong></p>
+                <pre style="white-space: pre-wrap;">${song.lyrics || 'No disponible'}</pre>
+                ${song.url_video ? `<p><strong>Video:</strong> <a href="${song.url_video}" target="_blank">Ver en YouTube</a></p>` : ''}
+            `;
+        } catch (error) {
+            console.error("Error al cargar la canción:", error);
+            container.innerHTML = "<p>Error al cargar la canción.</p>";
+        }
+    }
+
+    // === Función para cargar todas las canciones en el catálogo ===
+    async function loadAllSongs() {
+        if (!cardsContainer) return;
+        const apiUrl = `http://127.0.0.1:8000/api/songs/`;
+
+        try {
+            const response = await fetch(apiUrl);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const songs = await response.json();
 
+            cardsContainer.innerHTML = '';
             songs.forEach(song => {
-                const card = document.createElement("div");
-                card.className = "card";
+                const card = document.createElement('div');
+                card.classList.add('card');
 
-                // Mostrar solo la portada
-                card.innerHTML = `<img src="${song.album_image || '../assets/img/coin_machine1.jpg'}" alt="${song.title}">`;
+                const img = document.createElement('img');
+                img.src = song.album_image || '../assets/img/default_album.png';
+                img.alt = song.title;
 
-                // Redirigir a song_detail.html pasando el id
-                card.addEventListener("click", () => {
+                card.appendChild(img);
+                card.addEventListener('click', () => {
                     window.location.href = `song_detail.html?id=${song.id}`;
                 });
 
-                container.appendChild(card);
+                cardsContainer.appendChild(card);
             });
+
         } catch (error) {
-            console.error("Error al obtener canciones:", error);
-            container.innerHTML = "<p>Error al cargar las canciones.</p>";
+            console.error("Error al cargar canciones:", error);
+            if (cardsContainer) cardsContainer.innerHTML = "<p>Error al cargar canciones.</p>";
         }
     }
-const chatForm = document.getElementById('chat-form');
-const chatInput = document.getElementById('chat-input');
-const chatBody = document.getElementById('chat-body');
-const cardsContainer = document.querySelector('.cards-container'); // Contenedor de canciones
 
-chatForm.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  const message = chatInput.value.trim();
-  if (!message) return;
+    // === Función para manejar chat flotante ===
+    function initChat() {
+        if (!chatForm) return;
 
-  // Mostrar mensaje del usuario en el chat
-  const userMsg = document.createElement('p');
-  userMsg.classList.add('user');
-  userMsg.textContent = message;
-  chatBody.appendChild(userMsg);
-  chatBody.scrollTop = chatBody.scrollHeight;
-  chatInput.value = '';
+        chatForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const message = chatInput.value.trim();
+            if (!message) return;
 
-  try {
-    // Enviar mensaje a la API
-    const formData = new FormData();
-    formData.append('message', message);
+            // Mensaje del usuario
+            const userMsg = document.createElement('p');
+            userMsg.classList.add('user');
+            userMsg.textContent = message;
+            chatBody.appendChild(userMsg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            chatInput.value = '';
 
-    const response = await fetch('http://127.0.0.1:8000/api/recommendations/chat-recommendations', {
-      method: 'POST',
-      body: formData
-    });
+            try {
+                const formData = new FormData();
+                formData.append('message', message);
 
-    const data = await response.json();
+                const response = await fetch('http://127.0.0.1:8000/api/recommendations/chat-recommendations', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await response.json();
 
-    // Mostrar respuesta en el chat
-    const botMsg = document.createElement('p');
-    botMsg.classList.add('bot');
+                const botMsg = document.createElement('p');
+                botMsg.classList.add('bot');
 
-    if (Array.isArray(data) && data.length > 0) {
-      botMsg.innerHTML = data.map(s => `🎵 ${s.title}`).join('<br>');
-      chatBody.appendChild(botMsg);
-      chatBody.scrollTop = chatBody.scrollHeight;
+                if (Array.isArray(data) && data.length > 0) {
+                    botMsg.innerHTML = data.map(s => `🎵 ${s.title}`).join('<br>');
+                } else if (data.mensaje) {
+                    botMsg.textContent = data.mensaje;
+                } else {
+                    botMsg.textContent = 'No se encontraron recomendaciones';
+                }
 
-      // Actualizar grid de canciones SOLO con las recomendaciones
-      cardsContainer.innerHTML = ''; // Limpiar canciones actuales
-      data.forEach(song => {
-        const card = document.createElement('div');
-        card.classList.add('card');
+                chatBody.appendChild(botMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
 
-        // Solo imagen del álbum en la tarjeta
-        const img = document.createElement('img');
-        img.src = song.album_image || 'assets/img/default_album.png'; // Coloca un default si no hay imagen
-        img.alt = song.title;
-
-        // Al hacer click, ir a detalle de la canción
-        card.addEventListener('click', () => {
-          window.location.href = `song_detail.html?id=${song.id}`;
+            } catch (error) {
+                const botMsg = document.createElement('p');
+                botMsg.classList.add('bot');
+                botMsg.textContent = 'Error conectando con la API';
+                chatBody.appendChild(botMsg);
+                chatBody.scrollTop = chatBody.scrollHeight;
+                console.error(error);
+            }
         });
 
-        card.appendChild(img);
-        cardsContainer.appendChild(card);
-      });
-
-    } else if (data.mensaje) {
-      botMsg.textContent = data.mensaje;
-      chatBody.appendChild(botMsg);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    } else {
-      botMsg.textContent = 'No se encontraron recomendaciones';
-      chatBody.appendChild(botMsg);
-      chatBody.scrollTop = chatBody.scrollHeight;
+        // Minimizar chat
+        const chatHeader = document.getElementById('chat-header');
+        if (chatHeader) {
+            chatHeader.addEventListener('click', () => {
+                document.getElementById('chat-float').classList.toggle('minimized');
+            });
+        }
     }
 
-  } catch (error) {
-    const botMsg = document.createElement('p');
-    botMsg.classList.add('bot');
-    botMsg.textContent = 'Error conectando con la API';
-    chatBody.appendChild(botMsg);
-    chatBody.scrollTop = chatBody.scrollHeight;
-    console.error(error);
-  }
-});
-
-    fetchSongs();
+    // === Ejecutar funciones según la página ===
+    if (container) {
+        loadSongDetail(songId);
+    }
+    if (cardsContainer) {
+        loadAllSongs();
+    }
+    initChat();
 });

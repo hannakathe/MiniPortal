@@ -13,7 +13,8 @@ router = APIRouter(
 # Configurar cliente OpenRouter/OpenAI
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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"
+    api_key="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"
+    #RECORDAR: CAMBIAR API KEY NUEVA EN PRESENTACIÓN
 )
 
 # Dependencia DB
@@ -28,10 +29,11 @@ def get_db():
 # 1️⃣ Recomendaciones básicas por género (se mantiene igual)
 @router.get("/", response_model=list[schemas.Song])
 def recommend_songs(genre: str, db: Session = Depends(get_db)):
-    songs = db.query(models.Song).filter(models.Song.genre == genre).all()
+    songs = db.query(models.Song).filter(models.Song.genre.ilike(f"%{genre}%")).all()
     if not songs:
         raise HTTPException(status_code=404, detail="No se encontraron recomendaciones")
     return songs
+
 
 
 # 2️⃣ Recomendaciones tipo chat usando IA y validando contra BD

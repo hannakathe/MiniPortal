@@ -1,10 +1,10 @@
 /* ===== Micrositio Musical - Detalle de Canción ===== */
 
 .song-detail-container {
-    max-width: 800px;
-    margin: 40px auto;
+    max-width: auto;
+    margin: 40px 40px;
     padding: 20px;
-    background: #2b2b2b; /* fondo oscuro */
+    background: #2b2b2b;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
     color: #fff;
@@ -25,16 +25,32 @@
     margin: 0 auto 20px auto;
 }
 
+.song-detail-container pre {
+    background: #1f1f1f;
+    padding: 10px;
+    border-radius: 6px;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    color: #fff;
+    font-family: "Courier New", monospace;
+    margin-bottom: 15px;
+    max-height: 300px;
+}
+
+.song-detail-container a {
+    color: #00bfff;
+    text-decoration: underline;
+}
+
 .song-detail-container p {
     font-size: 1rem;
     line-height: 1.5;
     margin-bottom: 10px;
 }
 
-/* Botón volver */
 .back-btn {
     display: inline-block;
-    margin-top: 20px;
+    margin: 20px auto;
     padding: 8px 16px;
     background: #00bfff;
     color: #fff;
@@ -43,13 +59,14 @@
     font-weight: 500;
     transition: background 0.2s ease;
 }
-
 .back-btn:hover {
     background: #009acd;
 }
 
-/* Responsive */
 @media (max-width: 600px) {
+    .song-detail-container {
+        padding: 15px;
+    }
     .song-detail-container h1 {
         font-size: 1.5rem;
     }
@@ -57,6 +74,7 @@
         max-width: 100%;
     }
 }
+
 /* === Chat flotante === */
 #chat-float {
   position: fixed;
@@ -72,6 +90,11 @@
   overflow: hidden;
   z-index: 2000;
   font-family: 'Segoe UI', sans-serif;
+}
+
+#chat-float.minimized #chat-body,
+#chat-float.minimized #chat-form {
+    display: none;
 }
 
 #chat-header {
@@ -130,5 +153,3 @@
 #chat-form button:hover {
   background: #e6b800;
 }
-
-
