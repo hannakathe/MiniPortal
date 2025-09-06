@@ -31,8 +31,6 @@ const chatInput = document.getElementById('chat-input');
 const chatBody = document.getElementById('chat-body');
 const cardsContainer = document.querySelector('.cards-container'); // Contenedor de canciones
 
-
-
 chatForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   const message = chatInput.value.trim();
