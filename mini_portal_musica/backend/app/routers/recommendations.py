@@ -13,7 +13,7 @@ router = APIRouter(
 # Configurar cliente OpenRouter/OpenAI
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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"
+    api_key="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"
 )
 
 # Dependencia DB
@@ -81,3 +81,8 @@ async def chat_recommendations(message: str = Form(...), db: Session = Depends(g
     except Exception as e:
         print("ERROR GENERAL:", e)
         raise HTTPException(status_code=500, detail=f"Error IA: {str(e)}")
+    except Exception as e:
+        if "401" in str(e):
+            raise HTTPException(status_code=500, detail="API Key inválida o expirada")
+        raise HTTPException(status_code=500, detail=f"Error IA: {str(e)}")
+
