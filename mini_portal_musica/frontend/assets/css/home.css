@@ -71,29 +71,10 @@ section#home h2 {
 .name {
     position: relative;
     display: inline-block;
-    cursor: pointer;
 }
 
-.name::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -5px;
-    width: 0;
-    height: 2px;
-    background-color: #00bfff;
-    animation: underlineOnce 5s ease forwards;
-}
 
-@keyframes underlineOnce {
-    from { width: 0; }
-    to { width: 100%; }
-}
 
-.name:hover::after {
-    width: 100%;
-    transition: width 0.3s ease;
-}
 
 /* Botones */
 section#home .buttons {
@@ -171,8 +152,31 @@ button.play:hover {
 }
 
 
-    section#home h2 { font-size: 1.4rem; }
+
+
 }
+
+/* Títulos con línea debajo */
+section#home h2 {
+    font-family: "Inter", sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: #ccc;
+    position: relative;
+    display: inline-block; /* hace que el ancho se ajuste al texto */
+}
+
+section#home h2::after {
+    content: "";
+    display: block;
+    width: 50%;              /* mitad del ancho del texto */
+    height: 3px;             /* grosor de la línea */
+    background-color: white; /* color blanco */
+    margin-top: 6px;         /* separación con el texto */
+    border-radius: 2px;
+}
+
+
 
 @media (max-width: 480px) {
     section#home h1 { font-size: 2.5rem; }

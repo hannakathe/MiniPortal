@@ -1,10 +1,20 @@
 <section id="contact">
   <h1>Contacto</h1>
-  <form id="contactForm">
-    <input type="text" name="nombre" placeholder="Tu nombre" required>
-<input type="email" name="email" placeholder="Tu correo" required>
-<textarea name="mensaje" placeholder="Escribe tu mensaje" required></textarea>
+  <div class="contact-container">
+    <!-- Formulario (izquierda) -->
+    <form id="contactForm">
+      <input type="text" name="nombre" placeholder="Tu nombre" required>
+      <input type="email" name="email" placeholder="Tu correo" required>
+      <textarea name="mensaje" placeholder="Escribe tu mensaje" required></textarea>
+      <button type="submit">Enviar</button>
+    </form>
 
-    <button type="submit">Enviar</button>
-  </form>
+    <!-- Google Maps (derecha) -->
+    <div class="map-container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.728011961309!2d-74.05689322514448!3d4.642531095332279!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f9a3e197b57e9%3A0xb7f5e39d961d5fea!2sUniversidad%20Manuela%20Beltr%C3%A1n!5e0!3m2!1ses-419!2sco!4v1757528653146!5m2!1ses-419!2sco"
+        width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
 </section>

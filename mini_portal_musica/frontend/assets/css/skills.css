@@ -191,6 +191,18 @@
 section#skills h1 {
     font-family: "Inter", sans-serif;
     font-size: 5rem;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     line-height: 1.1;
+    text-align: left;     /* alineación del texto */
+    position: relative;
+}
+
+section#skills h1::after {
+    content: "";
+    display: block;
+    width: 50%;              /* mitad del ancho del contenedor */
+    height: 3px;             /* grosor de la línea */
+    background-color: white; /* color de la línea */
+    margin-top: 10px;        /* espacio entre el texto y la línea */
+    border-radius: 2px;      /* opcional */
 }

@@ -16,10 +16,28 @@
 #projects h1 {
     font-family: "Inter", sans-serif;
     font-size: 5rem;
-    margin-bottom: 80px;
+    margin-bottom: 100px;
     padding-top: 50px;
-    text-align: center;
+    text-align: center;        /* texto centrado */
+    position: relative;        /* referencia para ::after */
+    display: inline-block;     /* ajusta ancho al texto */
+    left: 50%;                 /* lo mandamos al centro */
+    transform: translateX(-50%); /* lo centramos bien */
 }
+
+#projects h1::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;             /* separación del texto */
+    left: 0;                   /* empieza desde la izquierda del texto */
+    width: 50%;                /* llega hasta la mitad del texto */
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+}
+
+
+
 
 /* Contenedor de las tarjetas */
 .cards {
@@ -37,7 +55,7 @@
 .card {
     position: relative;
     width: 350px;   /* antes 500px */
-    height: 400px;  /* antes 500px */
+    height: 350px;  /* antes 500px */
     border-radius: 12px;
     overflow: hidden;
     background-color: var(--card-bg, #fff);
@@ -103,7 +121,7 @@
     background-color: var(--card-bg, #fff);
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    padding: 40px 45px 45px 45px;
+    padding: 30px 45px 30px 45px;
     font-family: "Inter", sans-serif;
 }
 
