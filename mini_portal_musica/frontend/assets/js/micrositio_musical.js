@@ -9,6 +9,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     const params = new URLSearchParams(window.location.search);
     const songId = params.get("id");
 
+    // === Función para extraer el ID de YouTube de cualquier URL tipo watch?v= ===
+    function extractYouTubeID(url) {
+        if (!url) return null;
+        url = url.trim();
+        const regExp = /(?:\?v=|&v=|youtu\.be\/|\/embed\/)([a-zA-Z0-9_-]{11})/;
+        const match = url.match(regExp);
+        return match ? match[1] : null;
+    }
+
     // === Función para mostrar los detalles de una canción ===
     async function loadSongDetail(id) {
         if (!id) {
@@ -22,6 +31,23 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const song = await response.json();
 
+            let videoEmbed = '';
+            if (song.url_video) {
+                const videoID = extractYouTubeID(song.url_video);
+                if (videoID) {
+                    videoEmbed = `
+                        <p><strong>Video:</strong></p>
+                        <iframe width="50%" height="315" 
+                            src="https://www.youtube.com/embed/${videoID}" 
+                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                        <p><a href="${song.url_video}" target="_blank">Ver en YouTube</a></p>`;
+                } else {
+                    videoEmbed = `<p>Video no disponible</p>`;
+                }
+            }
+
             container.innerHTML = `
                 <h1>${song.title || 'Desconocido'}</h1>
                 <img src="${song.album_image || '../assets/img/coin_machine1.jpg'}" alt="${song.title}" style="width:300px; height:auto; border-radius:10px;">
@@ -34,7 +60,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p><strong>Descripción:</strong> ${song.description || ''}</p>
                 <p><strong>Letras:</strong></p>
                 <pre style="white-space: pre-wrap;">${song.lyrics || 'No disponible'}</pre>
-                ${song.url_video ? `<p><strong>Video:</strong> <a href="${song.url_video}" target="_blank">Ver en YouTube</a></p>` : ''}
+                ${videoEmbed}
             `;
         } catch (error) {
             console.error("Error al cargar la canción:", error);
@@ -61,7 +87,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 img.src = song.album_image || '../assets/img/default_album.png';
                 img.alt = song.title;
 
+                const title = document.createElement('h3');
+                title.textContent = song.title || 'Sin título';
+
                 card.appendChild(img);
+                card.appendChild(title);
+
                 card.addEventListener('click', () => {
                     window.location.href = `song_detail.html?id=${song.id}`;
                 });
@@ -84,7 +115,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const message = chatInput.value.trim();
             if (!message) return;
 
-            // Mensaje del usuario
             const userMsg = document.createElement('p');
             userMsg.classList.add('user');
             userMsg.textContent = message;
@@ -126,7 +156,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
-        // Minimizar chat
         const chatHeader = document.getElementById('chat-header');
         if (chatHeader) {
             chatHeader.addEventListener('click', () => {
@@ -135,12 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // === Ejecutar funciones según la página ===
-    if (container) {
-        loadSongDetail(songId);
-    }
-    if (cardsContainer) {
-        loadAllSongs();
-    }
+    if (container) loadSongDetail(songId);
+    if (cardsContainer) loadAllSongs();
     initChat();
 });
