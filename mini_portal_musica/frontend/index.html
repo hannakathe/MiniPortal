@@ -2,56 +2,95 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Portafolio Hanna Abril</title>
+  <meta charset="UTF-8">
+  <title>Portafolio Hanna Abril</title>
 
-    <!-- Estilos globales -->
-    <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Estilos globales -->
+  <link rel="stylesheet" href="assets/css/style.css">
 
-    <!-- Estilos de cada sección -->
-    <link rel="stylesheet" href="assets/css/home.css">
-    <link rel="stylesheet" href="assets/css/about_me.css">
-    <link rel="stylesheet" href="assets/css/projects.css">
-    <link rel="stylesheet" href="assets/css/skills.css">
-    <link rel="stylesheet" href="assets/css/contact.css">
+  <!-- Estilos de cada sección -->
+  <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/about_me.css">
+  <link rel="stylesheet" href="assets/css/projects.css">
+  <link rel="stylesheet" href="assets/css/skills.css">
+  <link rel="stylesheet" href="assets/css/contact.css">
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-  <a href="#home" class="brand">Hanna K. Abril</a>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="#home" class="brand">Hanna K. Abril</a>
 
-  <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Abrir menú">
-  <label for="nav-toggle" class="hamburger" aria-hidden="true">
-    <span></span><span></span><span></span>
-  </label>
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Abrir menú">
+    <label for="nav-toggle" class="hamburger" aria-hidden="true">
+      <span></span><span></span><span></span>
+    </label>
 
-  <ul class="nav-menu">
-    <li><a href="#home">Home</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
-</nav>
+    <ul class="nav-menu">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
 
-    <!-- Contenedores de secciones -->
-    <div id="home-container"></div>
-    <div id="about-container"></div>
-    <div id="projects-container"></div>
-    <div id="skills-container"></div>
-    <div id="contact-container"></div>
+  <!-- Contenedores de secciones -->
+  <div id="home-container"></div>
+  <div id="about-container"></div>
+  <div id="projects-container"></div>
+  <div id="skills-container"></div>
+  <div id="contact-container"></div>
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2025 Hanna Abril. Todos los derechos reservados.</p>
-    </footer>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Columna 1: Info -->
+      <div class="footer-info">
+        <h3>Hanna Abril</h3>
+        <p>Ingeniería de Software | Frontend Developer</p>
+      </div>
 
-    <!-- Script externo para cargar secciones -->
-    <script src="assets/js/loadSections.js"></script>
-    <script src="assets/js/carousel.js"></script>
-    <script src="assets/js/contact.js"></script>
+      <!-- Columna 2: Links -->
+      <div class="footer-links">
+        <h4>Enlaces rápidos</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#skills">Skills</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <!-- Columna 3: Redes -->
+      <div class="footer-social">
+        <h4>Conéctate</h4>
+        <div class="social-icons">
+          <a href="https://github.com/hannakathe/MiniPortal" target="_blank" aria-label="GitHub">
+            <img src="assets/icons/github_96.png" alt="GitHub">
+          </a>
+          <a href="https://www.linkedin.com/in/hanna-abril-góngora-418147230" target="_blank" aria-label="LinkedIn">
+            <img src="assets/icons/linkedin_96.png" alt="LinkedIn">
+          </a>
+          <a href="mailto:abrilhanna6@gmail.com" aria-label="Email">
+            <img src="assets/icons/gmail_96.png" alt="Email">
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Hanna Abril. Todos los derechos reservados.</p>
+    </div>
+  </footer>
+
+
+  <!-- Script externo para cargar secciones -->
+  <script src="assets/js/loadSections.js"></script>
+  <script src="assets/js/carousel.js"></script>
+  <script src="assets/js/contact.js"></script>
 
 
 </body>
