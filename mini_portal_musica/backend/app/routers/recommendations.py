@@ -9,6 +9,7 @@ router = APIRouter(
     prefix="/api/recommendations",
     tags=["Recommendations"]
 )
+#revisar como crear una variable de entorno para la api key
 
 # Configurar cliente OpenRouter/OpenAI
 client = OpenAI(
