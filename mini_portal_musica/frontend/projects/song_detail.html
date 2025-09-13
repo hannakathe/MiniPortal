@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <title>Detalles de la Canción</title>
     <link rel="stylesheet" href="../assets/css/song_detail.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 </head>
 <body>
 
@@ -22,6 +25,20 @@
     <button type="submit">Enviar</button>
   </form>
 </div>
+
+
+
+<button id="btn-map" style="margin-top: 15px;">📍 Ver ubicación</button>
+
+<!-- Modal para el mapa -->
+<div id="map-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+    background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999;">
+    <div style="position:relative; width:80%; max-width:800px; background:#fff; border-radius:10px; padding:10px;">
+        <span id="close-map" style="position:absolute; top:5px; right:10px; cursor:pointer; font-size:20px;">✖</span>
+        <div id="song-map" style="height:500px; width:100%; border-radius:10px;"></div>
+    </div>
+</div>
+
 
 <script src="../assets/js/micrositio_musical.js" defer></script>
 </body>

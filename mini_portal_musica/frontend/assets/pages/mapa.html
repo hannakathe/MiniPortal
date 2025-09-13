@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Mapa de Canciones</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+    #map { height: 500px; width: 100%; margin-top: 20px; }
+    #selector { margin: 10px 0; padding: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Mapa de Canciones</h1>
+  <select id="selector"></select>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    const apiUrl = "http://127.0.0.1:8000/api/songs/";
+
+    const map = L.map('map').setView([0, 0], 2);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    async function loadSongs() {
+      try {
+        const res = await fetch(apiUrl);
+        const songs = await res.json();
+
+        const selector = document.getElementById("selector");
+        selector.innerHTML = "";
+
+        songs.forEach((song, idx) => {
+          if (song.country_latitude && song.country_longitude) {
+            const option = document.createElement("option");
+            option.value = idx;
+            option.textContent = `${song.title} - ${song.country}`;
+            selector.appendChild(option);
+
+            const marker = L.marker([song.country_latitude, song.country_longitude])
+              .addTo(map)
+              .bindPopup(`<b>${song.title}</b><br>${song.artist}<br>${song.country}`);
+          }
+        });
+
+        selector.addEventListener("change", () => {
+          const idx = selector.value;
+          const song = songs[idx];
+          if (song.country_latitude && song.country_longitude) {
+            map.setView([song.country_latitude, song.country_longitude], 6);
+          }
+        });
+
+      } catch (error) {
+        console.error("Error cargando canciones:", error);
+      }
+    }
+
+    loadSongs();
+  </script>
+</body>
+</html>

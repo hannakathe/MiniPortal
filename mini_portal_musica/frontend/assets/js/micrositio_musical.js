@@ -13,7 +13,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     function extractYouTubeID(url) {
         if (!url) return null;
         url = url.trim();
-        const regExp = /(?:\?v=|&v=|youtu\.be\/|\/embed\/)([a-zA-Z0-9_-]{11})/;
+        
+        // Expresión regular mejorada para detectar más formatos de URL
+        const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
         const match = url.match(regExp);
         return match ? match[1] : null;
     }
@@ -61,7 +63,63 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p><strong>Letras:</strong></p>
                 <pre style="white-space: pre-wrap;">${song.lyrics || 'No disponible'}</pre>
                 ${videoEmbed}
+                <button id="btn-map" style="margin-top: 15px;">📍 Ver ubicación</button>
+                
+                <!-- Modal para el mapa -->
+                <div id="map-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
+                    background:rgba(0,0,0,0.7); justify-content:center; align-items:center; z-index:9999;">
+                    <div style="position:relative; width:80%; max-width:800px; background:#fff; border-radius:10px; padding:10px;">
+                        <span id="close-map" style="position:absolute; top:5px; right:10px; cursor:pointer; font-size:20px;">✖</span>
+                        <div id="song-map" style="height:500px; width:100%; border-radius:10px;"></div>
+                    </div>
+                </div>
             `;
+
+            // === Inicializar mapa en modal ===
+            const btnMap = document.getElementById("btn-map");
+            const mapModal = document.getElementById("map-modal");
+            const closeMap = document.getElementById("close-map");
+            let songMap;
+
+            if (btnMap && mapModal && closeMap) {
+                btnMap.addEventListener("click", () => {
+                    if (song.country_latitude && song.country_longitude) {
+                        mapModal.style.display = "flex";
+
+                        const zoomLevel = 4; // Cambia el zoom aquí
+
+                        if (songMap) {
+                            songMap.setView([song.country_latitude, song.country_longitude], zoomLevel);
+                        } else {
+                            songMap = L.map("song-map").setView([song.country_latitude, song.country_longitude], zoomLevel);
+
+                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                                attribution: '© OpenStreetMap contributors'
+                            }).addTo(songMap);
+
+                            L.marker([song.country_latitude, song.country_longitude])
+                                .addTo(songMap)
+                                .bindPopup(`<b>${song.title}</b><br>${song.artist}<br>${song.country}`)
+                                .openPopup();
+                        }
+                    } else {
+                        alert("No hay coordenadas disponibles para esta canción.");
+                    }
+                });
+
+                // Cerrar modal con botón ✖
+                closeMap.addEventListener("click", () => {
+                    mapModal.style.display = "none";
+                });
+
+                // Cerrar modal haciendo click fuera del contenido
+                mapModal.addEventListener("click", (e) => {
+                    if (e.target === mapModal) {
+                        mapModal.style.display = "none";
+                    }
+                });
+            }
+
         } catch (error) {
             console.error("Error al cargar la canción:", error);
             container.innerHTML = "<p>Error al cargar la canción.</p>";
@@ -142,7 +200,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (Array.isArray(data) && data.length > 0) {
                     botMsg.innerHTML = data.map(s => `🎵 ${s.title}`).join('<br>');
-                    // 👇 Aquí también actualizamos el catálogo en pantalla con las recomendaciones
+                    // Actualizamos el catálogo con las recomendaciones
                     renderSongs(data);
                 } else if (data.mensaje) {
                     botMsg.textContent = data.mensaje;
