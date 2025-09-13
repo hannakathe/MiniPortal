@@ -8,6 +8,7 @@ Este proyecto les permitirá entender la conexión real entre capas **frontend y
 
 **IMPORTANTE EJECUTAR ENTORNO VIRTUAL: source venv/Scripts/activate**
 **RELOAD SERVER: uvicorn app.main:app --reload**
+**ACTUALIZAR requirements.txt: pip freeze > requirements.txt**
 
 ---
 
