@@ -170,7 +170,7 @@ section#home h2::after {
     content: "";
     display: block;
     width: 50%;              /* mitad del ancho del texto */
-    height: 3px;             /* grosor de la línea */
+    height: 2px;             /* grosor de la línea */
     background-color: white; /* color blanco */
     margin-top: 6px;         /* separación con el texto */
     border-radius: 2px;

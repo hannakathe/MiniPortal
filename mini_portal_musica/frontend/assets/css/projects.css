@@ -31,7 +31,7 @@
     bottom: -10px;             /* separación del texto */
     left: 0;                   /* empieza desde la izquierda del texto */
     width: 50%;                /* llega hasta la mitad del texto */
-    height: 3px;
+    height: 2px;
     background-color: white;
     border-radius: 2px;
 }

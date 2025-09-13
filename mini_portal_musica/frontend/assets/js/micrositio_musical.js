@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", async () => {
-
     const container = document.getElementById("song-detail");
     const cardsContainer = document.getElementById("cards-container");
     const chatForm = document.getElementById('chat-form');
@@ -8,17 +7,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     const params = new URLSearchParams(window.location.search);
     const songId = params.get("id");
-
-    // === Función para extraer el ID de YouTube de cualquier URL tipo watch?v= ===
-    function extractYouTubeID(url) {
-        if (!url) return null;
-        url = url.trim();
-        
-        // Expresión regular mejorada para detectar más formatos de URL
-        const regExp = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/;
-        const match = url.match(regExp);
-        return match ? match[1] : null;
-    }
 
     // === Función para mostrar los detalles de una canción ===
     async function loadSongDetail(id) {
@@ -33,23 +21,55 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const song = await response.json();
 
+            console.log("Datos de la canción recibidos:", song); // Para depuración
+            console.log("Valor de url_video:", song.url_video); // Para depuración
+            console.log("Tipo de url_video:", typeof song.url_video); // Para depuración
+
             let videoEmbed = '';
-            if (song.url_video) {
-                const videoID = extractYouTubeID(song.url_video);
-                if (videoID) {
+            // Verificamos si url_video existe y no está vacío (incluyendo null, undefined o string vacío)
+            if (song.url_video != null && song.url_video !== undefined && song.url_video.toString().trim() !== '') {
+                const videoID = song.url_video.toString().trim();
+                console.log("ID de video extraído:", videoID); // Para depuración
+                
+                // Verificamos que el ID tenga la longitud correcta (11 caracteres)
+                if (videoID.length === 11) {
                     videoEmbed = `
-                        <p><strong>Video:</strong></p>
-                        <iframe width="50%" height="315" 
-                            src="https://www.youtube.com/embed/${videoID}" 
-                            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen>
-                        </iframe>
-                        <p><a href="${song.url_video}" target="_blank">Ver en YouTube</a></p>`;
+                        <div class="video-container">
+                            <p><strong>Video:</strong></p>
+                            <iframe width="100%" height="400" 
+                                src="https://www.youtube.com/embed/${videoID}" 
+                                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>`;
                 } else {
-                    videoEmbed = `<p>Video no disponible</p>`;
+                    videoEmbed = `
+                        <div class="video-container">
+                            <p><strong>Video:</strong></p>
+                            <p>Formato de ID no válido: "${videoID}"</p>
+                            <p>El ID de YouTube debe tener 11 caracteres, pero tiene ${videoID.length}.</p>
+                        </div>`;
+                    console.error("ID de YouTube con longitud incorrecta:", videoID, "Longitud:", videoID.length);
                 }
+            } else {
+                videoEmbed = `<p>Video no disponible - No se proporcionó un ID de video válido</p>`;
+                console.warn("No hay ID de video disponible para esta canción");
             }
 
+            // Crear el botón/enlace para las letras
+            let lyricsButton = '';
+            if (song.lyrics && song.lyrics.trim() !== '') {
+                lyricsButton = `
+                    <div style="margin: 15px 0;">
+                        <a href="${song.lyrics}" target="_blank" class="lyrics-button" style="text-decoration: none; color: white;">
+                            📝 Ver letra completa 📝
+                        </a>
+                    </div>`;
+            } else {
+                lyricsButton = `<p>Letra no disponible</p>`;
+            }
+
+            // Resto del código para renderizar la canción...
             container.innerHTML = `
                 <h1>${song.title || 'Desconocido'}</h1>
                 <img src="${song.album_image || '../assets/img/coin_machine1.jpg'}" alt="${song.title}" style="width:300px; height:auto; border-radius:10px;">
@@ -60,10 +80,9 @@ document.addEventListener("DOMContentLoaded", async () => {
                 <p><strong>País:</strong> ${song.country || 'Desconocido'}</p>
                 <p><strong>Fecha de lanzamiento:</strong> ${song.release_date || 'Desconocida'}</p>
                 <p><strong>Descripción:</strong> ${song.description || ''}</p>
-                <p><strong>Letras:</strong></p>
-                <pre style="white-space: pre-wrap;">${song.lyrics || 'No disponible'}</pre>
+                ${lyricsButton}
                 ${videoEmbed}
-                <button id="btn-map" style="margin-top: 15px;">📍 Ver ubicación</button>
+                <button id="btn-map" style="margin-top: 15px;">🌎 Ver ubicación 🌎</button>
                 
                 <!-- Modal para el mapa -->
                 <div id="map-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; 
@@ -81,42 +100,40 @@ document.addEventListener("DOMContentLoaded", async () => {
             const closeMap = document.getElementById("close-map");
             let songMap;
 
-            if (btnMap && mapModal && closeMap) {
+            if (btnMap && mapModal && closeMap && song.country_latitude && song.country_longitude) {
                 btnMap.addEventListener("click", () => {
-                    if (song.country_latitude && song.country_longitude) {
-                        mapModal.style.display = "flex";
+                    mapModal.style.display = "flex";
 
-                        const zoomLevel = 4; // Cambia el zoom aquí
+                    const zoomLevel = 4;
 
-                        if (songMap) {
-                            songMap.setView([song.country_latitude, song.country_longitude], zoomLevel);
-                        } else {
-                            songMap = L.map("song-map").setView([song.country_latitude, song.country_longitude], zoomLevel);
-
-                            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                                attribution: '© OpenStreetMap contributors'
-                            }).addTo(songMap);
-
-                            L.marker([song.country_latitude, song.country_longitude])
-                                .addTo(songMap)
-                                .bindPopup(`<b>${song.title}</b><br>${song.artist}<br>${song.country}`)
-                                .openPopup();
-                        }
+                    if (songMap) {
+                        songMap.setView([song.country_latitude, song.country_longitude], zoomLevel);
                     } else {
-                        alert("No hay coordenadas disponibles para esta canción.");
+                        songMap = L.map("song-map").setView([song.country_latitude, song.country_longitude], zoomLevel);
+
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '© OpenStreetMap contributors'
+                        }).addTo(songMap);
+
+                        L.marker([song.country_latitude, song.country_longitude])
+                            .addTo(songMap)
+                            .bindPopup(`<b>${song.title}</b><br>${song.artist}<br>${song.country}`)
+                            .openPopup();
                     }
                 });
 
-                // Cerrar modal con botón ✖
                 closeMap.addEventListener("click", () => {
                     mapModal.style.display = "none";
                 });
 
-                // Cerrar modal haciendo click fuera del contenido
                 mapModal.addEventListener("click", (e) => {
                     if (e.target === mapModal) {
                         mapModal.style.display = "none";
                     }
+                });
+            } else if (btnMap) {
+                btnMap.addEventListener("click", () => {
+                    alert("No hay coordenadas disponibles para esta canción.");
                 });
             }
 
@@ -126,6 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // Resto del código sin cambios...
     // === Función genérica para renderizar canciones en tarjetas ===
     function renderSongs(songs) {
         if (!cardsContainer) return;
@@ -200,7 +218,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (Array.isArray(data) && data.length > 0) {
                     botMsg.innerHTML = data.map(s => `🎵 ${s.title}`).join('<br>');
-                    // Actualizamos el catálogo con las recomendaciones
                     renderSongs(data);
                 } else if (data.mensaje) {
                     botMsg.textContent = data.mensaje;

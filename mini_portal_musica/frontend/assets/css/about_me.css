@@ -32,7 +32,7 @@ section#about {
     content: "";
     display: block;
     width: 50%;              /* mitad del ancho */
-    height: 3px;             /* grosor de la línea */
+    height: 2px;             /* grosor de la línea */
     background-color: white; /* color de la línea */
     margin-top: 10px;        /* separación con el texto */
     border-radius: 2px;
