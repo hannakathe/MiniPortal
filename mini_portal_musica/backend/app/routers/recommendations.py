@@ -4,18 +4,26 @@ from .. import schemas, database, models
 from openai import OpenAI
 from fastapi.responses import JSONResponse
 import json
+import os
+from dotenv import load_dotenv
+
+# Cargar las variables del archivo .env
+load_dotenv()
+
+# Obtener la API key desde las variables de entorno
+API_KEY = os.getenv("OPENROUTER_API_KEY")
+if not API_KEY:
+    raise ValueError("⚠️ No se encontró OPENROUTER_API_KEY en el entorno")
 
 router = APIRouter(
     prefix="/api/recommendations",
     tags=["Recommendations"]
 )
-#revisar como crear una variable de entorno para la api key
 
 # Configurar cliente OpenRouter/OpenAI
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
-    api_key="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"
-    #RECORDAR: CAMBIAR API KEY NUEVA EN PRESENTACIÓN
+    api_key=API_KEY
 )
 
 # Dependencia DB
@@ -27,14 +35,13 @@ def get_db():
         db.close()
 
 
-# 1️⃣ Recomendaciones básicas por género (se mantiene igual)
+# 1️⃣ Recomendaciones básicas por género
 @router.get("/", response_model=list[schemas.Song])
 def recommend_songs(genre: str, db: Session = Depends(get_db)):
     songs = db.query(models.Song).filter(models.Song.genre.ilike(f"%{genre}%")).all()
     if not songs:
         raise HTTPException(status_code=404, detail="No se encontraron recomendaciones")
     return songs
-
 
 
 # 2️⃣ Recomendaciones tipo chat usando IA y validando contra BD
@@ -61,7 +68,7 @@ async def chat_recommendations(message: str = Form(...), db: Session = Depends(g
         )
 
         recomendaciones = respuesta.choices[0].message.content.strip()
-        print("RESPUESTA IA:", recomendaciones)  # <--- depuración
+        print("RESPUESTA IA:", recomendaciones)  # depuración
 
         try:
             titulos = json.loads(recomendaciones)
@@ -83,9 +90,6 @@ async def chat_recommendations(message: str = Form(...), db: Session = Depends(g
 
     except Exception as e:
         print("ERROR GENERAL:", e)
-        raise HTTPException(status_code=500, detail=f"Error IA: {str(e)}")
-    except Exception as e:
         if "401" in str(e):
             raise HTTPException(status_code=500, detail="API Key inválida o expirada")
         raise HTTPException(status_code=500, detail=f"Error IA: {str(e)}")
-
