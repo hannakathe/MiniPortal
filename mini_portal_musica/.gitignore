@@ -5,6 +5,10 @@ ENV/
 env/  
 .venv/
 
+# Archivos de variables de entorno
+.env
+
+
 # Archivos compilados de Python
 __pycache__/
 *.py[cod]
