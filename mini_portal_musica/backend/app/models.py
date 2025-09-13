@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Text, Date
+from sqlalchemy import Column, Integer, String, Text, Date, Float
 from .database import Base
 
 class Song(Base):
@@ -16,3 +16,5 @@ class Song(Base):
     country = Column(String, nullable=True)                     # País de origen
     release_date = Column(Date, nullable=True)                  # Fecha de lanzamiento
     lyrics = Column(Text, nullable=True)                        # Letra de la canción
+    country_latitude = Column(Float, nullable=True)             # Nueva columna
+    country_longitude = Column(Float, nullable=True)            # Nueva columna

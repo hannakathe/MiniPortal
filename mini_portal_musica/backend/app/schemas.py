@@ -1,5 +1,6 @@
 from pydantic import BaseModel
 from datetime import date
+from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 
@@ -20,6 +21,8 @@ class SongBase(BaseModel):
     country: str | None = None
     release_date: date | None = None   # Fecha en formato YYYY-MM-DD
     lyrics: str | None = None          # Letra de la canción
+    country_latitude: Optional[float] = None
+    country_longitude: Optional[float] = None
 
 # Para crear canción (no incluye id)
 class SongCreate(SongBase):

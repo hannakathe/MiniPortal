@@ -68,6 +68,33 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // === Función genérica para renderizar canciones en tarjetas ===
+    function renderSongs(songs) {
+        if (!cardsContainer) return;
+        cardsContainer.innerHTML = '';
+
+        songs.forEach(song => {
+            const card = document.createElement('div');
+            card.classList.add('card');
+
+            const img = document.createElement('img');
+            img.src = song.album_image || '../assets/img/default_album.png';
+            img.alt = song.title;
+
+            const title = document.createElement('h3');
+            title.textContent = song.title || 'Sin título';
+
+            card.appendChild(img);
+            card.appendChild(title);
+
+            card.addEventListener('click', () => {
+                window.location.href = `song_detail.html?id=${song.id}`;
+            });
+
+            cardsContainer.appendChild(card);
+        });
+    }
+
     // === Función para cargar todas las canciones en el catálogo ===
     async function loadAllSongs() {
         if (!cardsContainer) return;
@@ -77,36 +104,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             const response = await fetch(apiUrl);
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const songs = await response.json();
-
-            cardsContainer.innerHTML = '';
-            songs.forEach(song => {
-                const card = document.createElement('div');
-                card.classList.add('card');
-
-                const img = document.createElement('img');
-                img.src = song.album_image || '../assets/img/default_album.png';
-                img.alt = song.title;
-
-                const title = document.createElement('h3');
-                title.textContent = song.title || 'Sin título';
-
-                card.appendChild(img);
-                card.appendChild(title);
-
-                card.addEventListener('click', () => {
-                    window.location.href = `song_detail.html?id=${song.id}`;
-                });
-
-                cardsContainer.appendChild(card);
-            });
-
+            renderSongs(songs);
         } catch (error) {
             console.error("Error al cargar canciones:", error);
             if (cardsContainer) cardsContainer.innerHTML = "<p>Error al cargar canciones.</p>";
         }
     }
 
-    // === Función para manejar chat flotante ===
+    // === Función para manejar chat flotante y recomendaciones IA ===
     function initChat() {
         if (!chatForm) return;
 
@@ -137,6 +142,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
                 if (Array.isArray(data) && data.length > 0) {
                     botMsg.innerHTML = data.map(s => `🎵 ${s.title}`).join('<br>');
+                    // 👇 Aquí también actualizamos el catálogo en pantalla con las recomendaciones
+                    renderSongs(data);
                 } else if (data.mensaje) {
                     botMsg.textContent = data.mensaje;
                 } else {
