@@ -199,7 +199,7 @@ body {
   background-color: #009acd;
 }
 
-/* ===== Chat flotante ===== */
+/* ===== Chat flotante ===== 
 #chat-icon {
   position: fixed;
   bottom: 20px;
@@ -305,9 +305,9 @@ body {
   background: #009acd;
 }
 
-/* Scroll del chat */
+/* Scroll del chat 
 #chat-body::-webkit-scrollbar {
   width: 6px;
 }
 #chat-body::-webkit-scrollbar-track { background: #111; }
-#chat-body::-webkit-scrollbar-thumb { background: #00bfff; border-radius: 3px; }
+#chat-body::-webkit-scrollbar-thumb { background: #00bfff; border-radius: 3px; }*/

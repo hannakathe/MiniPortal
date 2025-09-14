@@ -36,7 +36,23 @@ document.addEventListener("DOMContentLoaded", async () => {
                 botMsg.classList.add('bot');
 
                 if (Array.isArray(data) && data.length > 0) {
+                    // Mostrar en el chat
                     botMsg.innerHTML = data.map(s => `🎵 ${s.title}`).join('<br>');
+                    // Mostrar en el catálogo
+                    if (cardsContainer) {
+                        cardsContainer.innerHTML = ""; // limpiar antes
+                        data.forEach(song => {
+                            const card = document.createElement('div');
+                            card.classList.add('card');
+                            card.innerHTML = `
+                                <a href="song_detail.html?id=${song.id}" class="card-link">
+                                    <img src="${song.album_image || '../assets/img/coin_machine1.jpg'}" alt="${song.title}">
+                                    <h3>${song.title}</h3>
+                                </a>
+                            `;
+                            cardsContainer.appendChild(card);
+                        });
+                    }
                 } else if (data.mensaje) {
                     botMsg.textContent = data.mensaje;
                 } else {
