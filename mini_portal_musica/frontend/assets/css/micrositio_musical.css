@@ -245,3 +245,11 @@ h1 {
   background: #00bfff;
   border-radius: 3px;
 }
+.card a,
+.card a:link,
+.card a:visited,
+.card a:hover,
+.card a:active {
+    text-decoration: none; /* quita subrayado */
+    color: inherit; /* mantiene el color del texto */
+}

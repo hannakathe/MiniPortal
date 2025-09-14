@@ -1,87 +1,268 @@
 /* ===== Micrositio Musical - Detalle de Canción ===== */
+body {
+    margin: 0;
+    font-family: "Inter", sans-serif;
+    background: #1f1f1f;
+    color: #fff;
+}
 
-.song-detail-container {
-    max-width: auto;
-    margin: 40px 40px;
+.song-left, .song-right {
+    border: 1px solid #444;      /* Borde gris oscuro */
+    border-radius: 10px;         /* Bordes redondeados */
+    padding: 20px;               /* Margen interno */
+    background: #2b2b2b;         /* Fondo ligeramente más oscuro que body */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra sutil */
+}
+
+.song-detail-wrapper {
+    display: flex;
+    flex-wrap: wrap;          /* Permite que los elementos se apilen en pantallas pequeñas */
+    gap: 60px;
+    width: 100%;              /* Ocupa todo el ancho disponible */
+    max-width: 100vw;         /* Nunca más ancho que la ventana */
+    margin: 1% 1%;           /* Centrado horizontal */
     padding: 20px;
-    background: #2b2b2b;
+    overflow-x: hidden;       /* Evita scroll horizontal */
+    box-sizing: border-box;   /* Asegura que padding no aumente el ancho total */
+}
+
+/* Opcional: forzar que los hijos no sobrepasen el contenedor */
+.song-detail-wrapper > * {
+    flex: 1 1 300px;          /* Crecen, encogen y mínimo ancho 300px */
+    max-width: 100%;           /* Nunca sobrepasa el contenedor */
+}
+
+
+
+.song-left {
+    flex: 0 0 70%; /* fijo 70% */
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.song-right img {
+    width: 90%;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-    color: #fff;
-    font-family: "Inter", sans-serif;
+    align-self: center;
 }
 
-.song-detail-container h1 {
+.song-info h1 {
     font-size: 2rem;
-    margin-bottom: 20px;
-}
-
-.song-detail-container img {
-    width: 100%;
-    max-width: 400px;
-    height: auto;
-    border-radius: 10px;
-    display: block;
-    margin: 0 auto 20px auto;
-}
-
-.song-detail-container pre {
-    background: #1f1f1f;
-    padding: 10px;
-    border-radius: 6px;
-    overflow-x: auto;
-    white-space: pre-wrap;
-    color: #fff;
-    font-family: "Courier New", monospace;
     margin-bottom: 15px;
-    max-height: 300px;
+    color: white;
 }
 
-.song-detail-container a {
-    color: #00bfff;
-    text-decoration: underline;
-}
-
-.song-detail-container p {
+.song-info p {
     font-size: 1rem;
-    line-height: 1.5;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
-.back-btn {
-    display: inline-block;
-    margin: 20px auto;
-    padding: 8px 16px;
-    background: #00bfff;
-    color: #fff;
-    border-radius: 6px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: background 0.2s ease;
-}
-.back-btn:hover {
-    background: #009acd;
+.song-detail-wrapper p {
+    line-height: 1.6;   /* espacio entre líneas */
+    margin-bottom: 15px; /* espacio debajo de cada párrafo */
+    color: #f5f5f5;      /* opcional: color del texto */
 }
 
-@media (max-width: 600px) {
-    .song-detail-container {
-        padding: 15px;
+
+.song-right {
+    flex: 0 0 30%; /* fijo 30% */
+    max-width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: sticky;
+    top: 20px;
+}
+
+/* Responsive: apilan solo en mobile */
+@media (max-width: 900px) {
+    .song-detail-wrapper {
+        flex-wrap: wrap;
     }
-    .song-detail-container h1 {
-        font-size: 1.5rem;
-    }
-    .song-detail-container img {
+    .song-left, .song-right {
+        flex: 1 1 100%;
         max-width: 100%;
     }
 }
+/* Video YouTube */
+#video-container iframe {
+    width: 100%;
+    height: 500px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
 
-/* === Chat flotante === */
+/* ===== Botones Modernos ===== */
+#btn-map, .lyrics-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Efecto relleno */
+#btn-map::before, .lyrics-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #4900cf;
+    z-index: -1;
+    transition: all 0.4s ease;
+}
+
+#btn-map:hover::before, .lyrics-button:hover::before {
+    left: 0;
+}
+
+#btn-map:hover, .lyrics-button:hover {
+    color: #fff;
+}
+
+
+
+/* ===== Botones Modernos Lyrics===== */
+#btn-lyrics, .lyrics-button {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: transparent;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Efecto relleno */
+#btn-lyrics::before, .lyrics-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #4900cf;
+    z-index: -1;
+    transition: all 0.4s ease;
+}
+
+#btn-lyrics:hover::before, .lyrics-button:hover::before {
+    left: 0;
+}
+
+#btn-lyrics:hover, .lyrics-button:hover {
+    color: #fff;
+}
+
+/* Modal mapa */
+#map-modal {
+    display: none;
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0.7);
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    overflow-y: auto;
+}
+
+.map-content {
+    position: relative;
+    width: 80%;
+    max-width: 800px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+#song-map {
+    height: 500px;
+    width: 100%;
+    border-radius: 10px;
+}
+
+#close-map {
+    position:absolute;
+    top:5px;
+    right:10px;
+    cursor:pointer;
+    font-size:20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .song-left, .song-right {
+        flex: 1 1 100%;
+    }
+    #video-container iframe {
+        height: 200px;
+    }
+}
+
+
+
+.button-group {
+  display: flex;
+  gap: 50px; /* espacio entre botones */
+  margin-bottom: 15px; /* espacio debajo del grupo de botones */
+  align-self: center;
+}
+
+.button-group button,
+.button-group a {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background-color: #00bfff;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.button-group button:hover,
+.button-group a:hover {
+  background-color: #009acd;
+}
+
+
+/* ===== Chat flotante ===== */
 #chat-float {
   position: fixed;
   bottom: 20px;
+  margin: 1% 2%;
   right: 20px;
-  max-width: 300px;      /* ligeramente más ancho */
-  max-height: 450px; /* un poco más alto */
+  max-width: 300px;
+  max-height: 450px;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.7);
   display: flex;
@@ -92,12 +273,12 @@
 }
 
 #chat-header {
-  background: #111111; /* negro oscuro */
+  background: #111;
   padding: 12px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  color: #00bfff; /* azul para el encabezado */
+  color: #00bfff;
   font-size: 1rem;
 }
 
@@ -105,20 +286,14 @@
   flex: 1;
   padding: 12px;
   overflow-y: auto;
-  background: #1a1a1a; /* negro medio para el área de mensajes */
-  color: #ffffff;
+  background: #1a1a1a;
+  color: #fff;
   font-size: 0.9rem;
-}
-
-#chat-body p {
-  margin-bottom: 10px;
-  color: #ffffff;
-  word-wrap: break-word;
 }
 
 #chat-body p.user {
   text-align: right;
-  color: #00bfff; /* azul para los mensajes del usuario */
+  color: #00bfff;
   background: rgba(0, 191, 255, 0.1);
   padding: 6px 10px;
   border-radius: 12px;
@@ -128,8 +303,8 @@
 
 #chat-body p.bot {
   text-align: left;
-  color: #ffffff; /* texto blanco para el bot */
-  background: rgba(0, 191, 255, 0.2); /* azul tenue para mensajes del bot */
+  color: #fff;
+  background: rgba(0, 191, 255, 0.2);
   padding: 6px 10px;
   border-radius: 12px;
   display: inline-block;
@@ -139,7 +314,7 @@
 #chat-form {
   display: flex;
   border-top: 1px solid rgba(255,255,255,0.2);
-  background: #111111; /* negro para el footer */
+  background: #111;
 }
 
 #chat-input {
@@ -147,13 +322,13 @@
   padding: 10px;
   border: none;
   outline: none;
-  background: #1a1a1a; /* negro medio */
-  color: #ffffff;      /* letras blancas */
+  background: #1a1a1a;
+  color: #fff;
   font-size: 0.95rem;
 }
 
 #chat-form button {
-  background: #00bfff; /* azul para el botón */
+  background: #00bfff;
   border: none;
   padding: 0 18px;
   cursor: pointer;
@@ -163,103 +338,12 @@
 }
 
 #chat-form button:hover {
-  background: #009acd; /* azul más oscuro al pasar el cursor */
+  background: #009acd;
 }
 
 /* Scroll del chat */
 #chat-body::-webkit-scrollbar {
   width: 6px;
 }
-
-#chat-body::-webkit-scrollbar-track {
-  background: #111;
-}
-
-#chat-body::-webkit-scrollbar-thumb {
-  background: #00bfff;
-  border-radius: 3px;
-}
-
-
-/* ===== Botón Ver Ubicación (Mapa) ===== */
-#btn-map {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: transparent;       /* Fondo inicial transparente */
-    color: #fff;                  /* Texto blanco */
-    border: none;                 /* Sin bordes */
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: color 0.3s ease;
-}
-
-/* Capa pseudo para el efecto de relleno */
-#btn-map::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #4900cf;       /* Azul noche claro */
-    z-index: -1;
-    transition: all 0.4s ease;
-}
-
-/* Hover: relleno de izquierda a derecha */
-#btn-map:hover::before {
-    left: 0;
-}
-
-/* Mantener el texto visible y blanco sobre el fondo */
-#btn-map:hover {
-    color: #fff;
-}
-
-
-/* ===== Bonon de Lyrics ===== */
-.lyrics-button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: transparent;       /* Fondo inicial transparente */
-    color: #fff;                  /* Texto blanco */
-    border: none;                 /* Sin bordes */
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: color 0.3s ease;
-}
-
-/* Capa pseudo para el efecto de relleno */
-.lyrics-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #4900cf;       /* Azul noche claro */
-    z-index: -1;
-    transition: all 0.4s ease;
-}
-
-/* Hover: relleno de izquierda a derecha */
-.lyrics-button:hover::before {
-    left: 0;
-}
-
-/* Mantener el texto visible y blanco sobre el fondo */
-.lyrics-button:hover {
-    color: #fff;
-}
+#chat-body::-webkit-scrollbar-track { background: #111; }
+#chat-body::-webkit-scrollbar-thumb { background: #00bfff; border-radius: 3px; }

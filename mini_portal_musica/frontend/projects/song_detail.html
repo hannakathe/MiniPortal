@@ -1,30 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Detalles de la Canción</title>
-    <link rel="stylesheet" href="../assets/css/song_detail.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
+<head>
+  <meta charset="UTF-8">
+  <title>Detalle de Canción</title>
+  <link rel="stylesheet" href="../assets/css/song_detail.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 </head>
+
 <body>
 
-<div class="song-detail-container" id="song-detail">
-    <p>Cargando información...</p>
-</div>
+  <div class="song-detail-wrapper">
+
+    <!-- COLUMNA IZQUIERDA -->
+    <div class="song-left">
+      <div id="video-container"></div>
+      <div class="song-info" id="song-info">
+        <div class="button-group">
+          <button id="btn-map">🌎 Ver en mapa 🌎</button>
+          <a id="btn-lyrics" href="#" target="_blank">📝 Ver letras 📝</a>
+        </div>
+
+        <p><strong>Artista:</strong> <span id="song-artist"></span></p>
+        <p><strong>Género:</strong> <span id="song-genre"></span></p>
+        <p><strong>Discográfica:</strong> <span id="song-discografic"></span></p>
+        <p><strong>Álbum:</strong> <span id="song-album"></span></p>
+        <p><strong>País:</strong> <span id="song-country"></span></p>
+        <p><strong>Fecha de lanzamiento:</strong> <span id="song-release-date"></span></p>
+
+      </div>
+    </div>
+
+    <!-- COLUMNA DERECHA -->
+    <div class="song-right">
+      <img id="album-image" src="../assets/img/coin_machine1.jpg" alt="Álbum">
+      <h1 id="song-title">Cargando...</h1>
+      <p id="song-description"></p>
 
 
-<!-- Chat flotante -->
-<div id="chat-float">
-  <div id="chat-header">🎵 Music Chat</div>
-  <div id="chat-body"></div>
-  <form id="chat-form">
-    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." required>
-    <button type="submit">Enviar</button>
-  </form>
-</div>
+    </div>
 
-<script src="../assets/js/micrositio_musical.js" defer></script>
+  </div>
+
+  <!-- Modal para el mapa -->
+  <div id="map-modal">
+    <div class="map-content">
+      <span id="close-map">✖</span>
+      <div id="song-map"></div>
+    </div>
+  </div>
+
+  <!-- Chat flotante -->
+  <div id="chat-float">
+    <div id="chat-header">🎵 Music Chat</div>
+    <div id="chat-body"></div>
+    <form id="chat-form">
+      <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." required>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script src="../assets/js/micrositio_musical.js" defer></script>
 </body>
+
 </html>
