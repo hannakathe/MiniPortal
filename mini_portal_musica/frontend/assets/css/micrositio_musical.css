@@ -142,21 +142,34 @@ h1 {
 }
 
 /* ===== Icono de chat ===== */
+/* ===== Icono de chat ===== */
 #chat-icon {
   position: fixed;
   bottom: 20px;
   right: 20px;
   width: 60px;
   height: 60px;
+  background: #000000;              /* círculo blanco */
+  border-radius: 50%;            /* forma circular */
+  display: flex;                 
+  justify-content: center;       /* centra horizontal */
+  align-items: center;           /* centra vertical */
   cursor: pointer;
   z-index: 3000;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, opacity 0.3s ease;
   margin: 1% 2%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#chat-icon img {
+  width: 25px;    /* tamaño del ícono */
+  height: 25px;
 }
 
 #chat-icon:hover {
   transform: scale(1.1);
 }
+
 
 /* ===== Chat flotante ===== */
 #chat-float.minimized {
