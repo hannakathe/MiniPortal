@@ -1,6 +1,9 @@
+// Espera a que el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", async () => {
 
+    // Contenedor donde se mostrarán las tarjetas de canciones
     const cardsContainer = document.getElementById("cards-container");
+    // Obtiene el ID de la canción desde los parámetros de la URL
     const songId = new URLSearchParams(window.location.search).get("id");
 
     // === Chat flotante ===
@@ -10,15 +13,17 @@ document.addEventListener("DOMContentLoaded", async () => {
     const chatFloat = document.getElementById('chat-float');
     const chatIcon = document.getElementById('chat-icon');
 
+    // Función para inicializar el chat
     function initChat() {
         if (!chatForm) return;
 
-        // Enviar mensaje
+        // Enviar mensaje al chat
         chatForm.addEventListener('submit', async e => {
             e.preventDefault();
             const message = chatInput.value.trim();
             if (!message) return;
 
+            // Mostrar mensaje del usuario en el chat
             const userMsg = document.createElement('p');
             userMsg.classList.add('user');
             userMsg.textContent = message;
@@ -27,20 +32,23 @@ document.addEventListener("DOMContentLoaded", async () => {
             chatInput.value = '';
 
             try {
+                // Enviar mensaje a la API para obtener recomendaciones
                 const formData = new FormData();
                 formData.append('message', message);
                 const response = await fetch('http://127.0.0.1:8000/api/recommendations/chat-recommendations', { method: 'POST', body: formData });
                 const data = await response.json();
 
+                // Crear mensaje del bot
                 const botMsg = document.createElement('p');
                 botMsg.classList.add('bot');
 
                 if (Array.isArray(data) && data.length > 0) {
-                    // Mostrar en el chat
+                    // Mostrar recomendaciones en el chat
                     botMsg.innerHTML = data.map(s => `🎵 ${s.title}`).join('<br>');
-                    // Mostrar en el catálogo
+
+                    // Mostrar recomendaciones en el catálogo de canciones
                     if (cardsContainer) {
-                        cardsContainer.innerHTML = ""; // limpiar antes
+                        cardsContainer.innerHTML = ""; // Limpiar antes
                         data.forEach(song => {
                             const card = document.createElement('div');
                             card.classList.add('card');
@@ -62,6 +70,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 chatBody.appendChild(botMsg);
                 chatBody.scrollTop = chatBody.scrollHeight;
             } catch (error) {
+                // Mostrar mensaje de error si falla la conexión
                 const botMsg = document.createElement('p');
                 botMsg.classList.add('bot');
                 botMsg.textContent = 'Error conectando con la API';
@@ -71,7 +80,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
-        // Abrir chat desde icono
+        // Abrir chat desde icono flotante
         if(chatIcon && chatFloat){
             chatIcon.addEventListener("click", () => {
                 chatFloat.classList.remove("minimized"); // Mostrar chat
@@ -99,7 +108,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     initChat();
 
-    // === Cargar catálogo de canciones (solo si estamos en micrositio_musical.html) ===
+    // === Cargar catálogo de canciones (micrositio_musical.html) ===
     async function loadSongsCatalog() {
         if (!cardsContainer) return;
 
@@ -109,6 +118,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             if (!Array.isArray(songs)) return;
 
+            // Crear tarjeta por cada canción
             songs.forEach(song => {
                 const card = document.createElement('div');
                 card.classList.add('card');
@@ -127,10 +137,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // === Cargar detalle de canción (solo si estamos en song_detail.html) ===
+    // === Cargar detalle de canción (song_detail.html) ===
     async function loadSongDetail(id) {
         if (!id) return;
 
+        // Obtener elementos del DOM para mostrar información de la canción
         const albumImage = document.getElementById("album-image");
         const songTitle = document.getElementById("song-title");
         const songArtist = document.getElementById("song-artist");
@@ -153,6 +164,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             const response = await fetch(`http://127.0.0.1:8000/api/songs/${id}`);
             const song = await response.json();
 
+            // Mostrar datos de la canción en el DOM
             if(albumImage) albumImage.src = song.album_image || '../assets/img/coin_machine1.jpg';
             if(albumImage) albumImage.alt = song.title || 'Álbum';
             if(songTitle) songTitle.textContent = song.title || 'Desconocido';
@@ -164,6 +176,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if(songReleaseDate) songReleaseDate.textContent = song.release_date || 'Desconocida';
             if(songDescription) songDescription.textContent = song.description || '';
 
+            // Mostrar video de YouTube si existe
             if (videoContainer) {
                 if (song.url_video && song.url_video.trim().length === 11) {
                     videoContainer.innerHTML = `
@@ -176,6 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
 
+            // Configurar botón de letra
             if (btnLyrics) {
                 if (song.lyrics && song.lyrics.trim() !== '') {
                     btnLyrics.href = song.lyrics;
@@ -184,11 +198,13 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
 
+            // Configurar botón de mapa
             if (btnMap) {
                 btnMap.addEventListener("click", () => {
                     if (song.country_latitude && song.country_longitude) {
                         if(mapModal) mapModal.style.display = "flex";
 
+                        // Inicializar mapa solo una vez
                         if (!songMap && songMapDiv) {
                             songMap = L.map(songMapDiv).setView([song.country_latitude, song.country_longitude], 4);
                             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -207,6 +223,7 @@ document.addEventListener("DOMContentLoaded", async () => {
                 });
             }
 
+            // Cerrar modal de mapa
             if(closeMap && mapModal){
                 closeMap.addEventListener("click", () => mapModal.style.display = "none");
                 mapModal.addEventListener("click", (e) => { if(e.target === mapModal) mapModal.style.display = "none"; });
@@ -217,6 +234,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
+    // Dependiendo de si hay songId, cargamos detalle o catálogo
     if(songId) {
         loadSongDetail(songId); // song_detail.html
     } else {

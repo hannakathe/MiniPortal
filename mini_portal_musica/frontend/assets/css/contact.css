@@ -1,4 +1,5 @@
 /* ===== Contact Section ===== */
+/* Sección principal de contacto */
 #contact {
   padding: 80px 80px;
   max-width: auto;
@@ -8,7 +9,7 @@
   font-family: "Inter", sans-serif;
 }
 
-
+/* Título principal de la sección */
 #contact h1 {
   font-family: "Inter", sans-serif;
   font-size: 5rem;
@@ -20,6 +21,7 @@
   padding: 30px;
 }
 
+/* Línea decorativa bajo el título */
 #contact h1::after {
   content: "";
   display: block;
@@ -31,14 +33,14 @@
   margin-left: 0;          /* línea pegada al lado izquierdo del texto */
 }
 
-
-
+/* Formulario de contacto */
 #contact form {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
+/* Campos de entrada del formulario */
 #contact input,
 #contact textarea {
   padding: 12px 15px;
@@ -52,17 +54,19 @@
   transition: border 0.3s ease;
 }
 
+/* Efectos de focus en campos */
 #contact input:focus,
 #contact textarea:focus {
   border: 2px solid #00bfff;
 }
 
+/* Área de texto del formulario */
 #contact textarea {
   resize: none;
   min-height: 120px;
 }
 
-/* ===== Botón Enviar Contacto - Gradiente solo en hover ===== */
+/* ===== Botón de Envío con Efecto Hover ===== */
 #contact button {
     padding: 12px 20px;
     border: none;              /* Sin bordes iniciales */
@@ -78,7 +82,7 @@
     transition: color 0.3s ease;
 }
 
-/* Pseudo-elemento para el gradiente */
+/* Efecto de gradiente animado en hover */
 #contact button::before {
     content: '';
     position: absolute;
@@ -95,19 +99,17 @@
     border-radius: 8px;
 }
 
-/* Hover: mover gradiente de izquierda a derecha */
+/* Animación del gradiente al hacer hover */
 #contact button:hover::before {
     left: 0;
 }
 
-/* Mantener el texto visible sobre el fondo animado */
+/* Color del texto durante hover */
 #contact button:hover {
     color: #fff;
 }
 
-
-
-/* Mensajes */
+/* Mensajes de estado (éxito/error) */
 #contact .message {
   margin-top: 10px;
   font-size: 0.9rem;
@@ -121,6 +123,7 @@
   color: #ff5252;
 }
 
+/* Contenedor principal de contacto (formulario + mapa) */
 .contact-container {
   display: flex;
   justify-content: space-between;
@@ -128,6 +131,7 @@
   gap: 40px;
 }
 
+/* Formulario dentro del contenedor */
 #contact form {
   flex: 1;
   min-width: 300px;
@@ -136,6 +140,7 @@
   gap: 15px;
 }
 
+/* Contenedor del mapa */
 .map-container {
   flex: 1;
   min-width: 300px;

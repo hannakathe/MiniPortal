@@ -1,56 +1,70 @@
 /* ------------------ */
 /* About Me Section   */
 /* ------------------ */
+/* Sección principal "Sobre Mí" con layout de dos columnas */
 section#about {
     display: grid;
     grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 40px;              /* espacio entre columnas */
-    padding: 0 8%;          /* márgenes laterales */
-    min-height: 100vh;      /* altura mínima */
+    gap: 40px;
+    /* espacio entre columnas */
+    padding: 0 8%;
+    /* márgenes laterales */
+    min-height: 100vh;
+    /* altura mínima */
     justify-content: center;
     box-sizing: border-box;
 }
 
-#about-left, #about-right {
+/* Contenedores izquierdo y derecho */
+#about-left,
+#about-right {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
 }
 
+/* Estilos del título principal */
 #about-left h1 {
     font-family: "Inter", sans-serif;
     font-size: clamp(2rem, 8vw, 5rem);
-    text-align: left;        /* alineación del texto */
+    text-align: left;
+    /* alineación del texto */
     word-wrap: break-word;
     position: relative;
     margin-bottom: 20px;
 }
 
+/* Línea decorativa bajo el título */
 #about-left h1::after {
     content: "";
     display: block;
-    width: 50%;              /* mitad del ancho */
-    height: 2px;             /* grosor de la línea */
-    background-color: white; /* color de la línea */
-    margin-top: 10px;        /* separación con el texto */
+    width: 50%;
+    /* mitad del ancho */
+    height: 2px;
+    /* grosor de la línea */
+    background-color: white;
+    /* color de la línea */
+    margin-top: 10px;
+    /* separación con el texto */
     border-radius: 2px;
 }
 
-
-
+/* Estilos del párrafo descriptivo */
 #about-left p {
     font-family: "Open Sans", sans-serif;
     font-size: clamp(0.85rem, 1vw, 0.95rem);
     line-height: 1.7;
-    margin: 10px 0 20px 0;   /* más cerca del título */
+    margin: 10px 0 20px 0;
+    /* más cerca del título */
     max-width: 700px;
     text-align: justify;
     margin-left: auto;
     margin-right: auto;
 }
 
+/* Grid de información (items como carrera, universidad, etc.) */
 #about-info {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -59,6 +73,7 @@ section#about {
     margin-top: 40px;
 }
 
+/* Estilos de los items de información */
 .about-item h2 {
     font-family: "Open Sans", sans-serif;
     font-size: clamp(1.2rem, 2vw, 2rem);
@@ -75,8 +90,12 @@ section#about {
     text-align: justify;
 }
 
-/* Botones */
-section#about button, section#about .btn {
+/* ------------------ */
+/* Botones            */
+/* ------------------ */
+/* Estilos base para botones */
+section#about button,
+section#about .btn {
     padding: 10px 25px;
     margin-right: 10px;
     border: none;
@@ -87,6 +106,7 @@ section#about button, section#about .btn {
     border-radius: 8px;
 }
 
+/* Botón principal (Explore) */
 button.explore {
     background-color: #fff;
     color: #000;
@@ -97,6 +117,7 @@ button.explore:hover {
     color: #fff;
 }
 
+/* Botón secundario (Play) */
 button.play {
     background-color: transparent;
     color: #fff;
@@ -109,29 +130,28 @@ button.play:hover {
 }
 
 /* ------------------ */
-/* Imagen / Carrusel  */
+/* Carrusel           */
 /* ------------------ */
+/* Contenedor del carrusel */
 #about-right {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100%;
-
 }
 
-
-
-
-/* Carrusel */
+/* Carrusel de imágenes */
 .carousel {
     position: relative;
-    width: 500px;     /* 👈 ancho fijo */
-    height: 400px;    /* 👈 alto fijo */
+    width: 500px;
+    /* 👈 ancho fijo */
+    height: 400px;
+    /* 👈 alto fijo */
     overflow: hidden;
     border-radius: 10px;
 }
 
-/* Imágenes del carrusel */
+/* Items individuales del carrusel */
 .carousel-item {
     position: absolute;
     top: 0;
@@ -139,22 +159,25 @@ button.play:hover {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center center; /* centra la imagen */
+    object-position: center center;
+    /* centra la imagen */
     opacity: 0;
     transition: opacity 1s ease-in-out;
 }
 
+/* Estado activo del item del carrusel */
 .carousel-item.active {
     opacity: 1;
     z-index: 1;
 }
 
-
-
 /* ------------------ */
-/* Responsive         */
+/* Responsive Design  */
 /* ------------------ */
+/* Tablets y pantallas medianas */
 @media (max-width: 1024px) {
+
+    /* Cambio a layout de una columna */
     section#about {
         grid-template-columns: 1fr;
         text-align: center;
@@ -163,41 +186,55 @@ button.play:hover {
         min-height: auto;
     }
 
-    #about-left, #about-right {
+    /* Centrado de contenido */
+    #about-left,
+    #about-right {
         align-items: center;
         text-align: center;
     }
 
-    #about-left p, 
+    /* Alineación central de textos */
+    #about-left p,
     .about-item p {
         text-align: center;
     }
 }
 
+/* Móviles y tablets pequeñas */
 @media (max-width: 768px) {
+
+    /* Ajuste de tamaño de título */
     #about-left h1 {
         font-size: clamp(2rem, 6vw, 3rem);
     }
 
-    #about-right img, 
-.carousel {
-    width: 100%;
-    max-width: 400px;       /* tamaño fijo máximo */
-    height: auto;           /* mantiene proporción */
-    object-fit: contain;    /* se adapta sin recortarse */
-    margin: 0 auto;
-    border-radius: 10px;
-    display: block;
-    background-color: #000; /* opcional, relleno detrás de la imagen */
+    /* Ajuste responsivo del carrusel */
+    #about-right img,
+    .carousel {
+        width: 100%;
+        max-width: 400px;
+        /* tamaño fijo máximo */
+        height: auto;
+        /* mantiene proporción */
+        object-fit: contain;
+        /* se adapta sin recortarse */
+        margin: 0 auto;
+        border-radius: 10px;
+        display: block;
+        background-color: #000;
+        /* opcional, relleno detrás de la imagen */
+    }
 }
 
-}
-
+/* Móviles pequeños */
 @media (max-width: 480px) {
+
+    /* Ajustes de tipografía */
     #about-left h1 {
         font-size: clamp(1.8rem, 8vw, 2.5rem);
     }
 
+    /* Ajustes de textos y párrafos */
     #about-left p,
     .about-item p {
         max-width: 95%;
@@ -207,8 +244,11 @@ button.play:hover {
         overflow-wrap: break-word;
     }
 
-    section#about button, section#about .btn {
-        width: 100%;   /* botones ocupan todo el ancho */
+    /* Botones en bloque (ancho completo) */
+    section#about button,
+    section#about .btn {
+        width: 100%;
+        /* botones ocupan todo el ancho */
         margin: 10px 0;
     }
 }

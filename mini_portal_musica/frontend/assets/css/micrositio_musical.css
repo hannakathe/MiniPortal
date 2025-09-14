@@ -1,4 +1,5 @@
 /* === Reset básico === */
+/* Reset y estilos base de la página */
 * {
   margin: 0;
   padding: 0;
@@ -13,6 +14,7 @@ body {
   padding: 20px;
 }
 
+/* Título principal de la página */
 h1 {
   text-align: center;
   margin-top: 30px;
@@ -23,6 +25,7 @@ h1 {
 }
 
 /* === Grid de canciones === */
+/* Contenedor grid para las tarjetas de canciones */
 .cards-container {
   display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 👉 se adapta */
@@ -31,7 +34,8 @@ h1 {
   padding: 10px;
 }
 
-/* === Tarjetas === */
+/* === Tarjetas de canciones === */
+/* Estilos de las tarjetas individuales */
 .card {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -46,12 +50,14 @@ h1 {
   align-items: center;
 }
 
+/* Efectos hover en tarjetas */
 .card:hover {
   transform: translateY(-6px);
   box-shadow: 0 8px 25px rgba(0,0,0,0.5);
   background: rgba(255, 255, 255, 0.08);
 }
 
+/* Imágenes dentro de las tarjetas */
 .card img {
   width: 100%;
   height: auto;
@@ -60,6 +66,7 @@ h1 {
   margin-bottom: 8px; /* separación con el título */
 }
 
+/* Títulos de las canciones */
 .card h3 {
   margin: 0;
   padding: 5px;
@@ -73,7 +80,8 @@ h1 {
   width: 100%; /* 👈 asegura que el ellipsis funcione */
 }
 
-/* === Modal (opcional) === */
+/* === Modal de detalle === */
+/* Ventana modal para detalles de canción */
 .modal {
   display: none;
   position: fixed;
@@ -88,6 +96,7 @@ h1 {
   z-index: 1000;
 }
 
+/* Contenido del modal */
 .modal-content {
   background: #1f1f1f;
   color: #f1f1f1;
@@ -100,6 +109,7 @@ h1 {
   animation: fadeIn 0.3s ease-in-out;
 }
 
+/* Elementos dentro del modal */
 .modal-content img {
   max-width: 100%;
   border-radius: 14px;
@@ -117,6 +127,7 @@ h1 {
   color: #d1d5db;
 }
 
+/* Botón de cerrar modal */
 .close {
   float: right;
   font-size: 22px;
@@ -130,7 +141,7 @@ h1 {
   color: #ff0000;
 }
 
-/* Animación modal */
+/* Animación de entrada del modal */
 @keyframes fadeIn {
   from {
     transform: translateY(-20px);
@@ -142,8 +153,7 @@ h1 {
   }
 }
 
-/* ===== Icono de chat ===== */
-/* ===== Icono de chat ===== */
+/* ===== Icono de chat flotante ===== */
 #chat-icon {
   position: fixed;
   bottom: 20px;
@@ -171,7 +181,6 @@ h1 {
   transform: scale(1.1);
 }
 
-
 /* ===== Chat flotante ===== */
 #chat-float.minimized {
   display: none;
@@ -193,6 +202,7 @@ h1 {
   font-family: 'Segoe UI', sans-serif;
 }
 
+/* Encabezado del chat */
 #chat-header {
   background: #111;
   padding: 12px;
@@ -202,6 +212,7 @@ h1 {
   font-size: 1rem;
 }
 
+/* Cuerpo del chat con mensajes */
 #chat-body {
   flex: 1;
   padding: 12px;
@@ -211,6 +222,7 @@ h1 {
   font-size: 0.9rem;
 }
 
+/* Estilos de mensajes de usuario y bot */
 #chat-body p.user {
   text-align: right;
   color: #00bfff;
@@ -231,6 +243,7 @@ h1 {
   max-width: 80%;
 }
 
+/* Formulario de entrada de chat */
 #chat-form {
   display: flex;
   border-top: 1px solid rgba(255,255,255,0.2);
@@ -247,7 +260,7 @@ h1 {
   font-size: 0.95rem;
 }
 
-/* ===== Botón Enviar Chat - Gradiente solo en hover ===== */
+/* ===== Botón de enviar chat con efecto hover ===== */
 #chat-form button {
     padding: 0 18px;
     border: none;              /* Sin bordes iniciales */
@@ -262,7 +275,7 @@ h1 {
     transition: color 0.3s ease;
 }
 
-/* Pseudo-elemento para el gradiente */
+/* Efecto de gradiente animado en hover */
 #chat-form button::before {
     content: '';
     position: absolute;
@@ -279,26 +292,24 @@ h1 {
     border-radius: 8px;
 }
 
-/* Hover: gradiente de izquierda a derecha */
+/* Animación del gradiente al hacer hover */
 #chat-form button:hover::before {
     left: 0;
 }
 
-/* Mantener el texto visible sobre el gradiente */
 #chat-form button:hover {
     color: #fff;
 }
 
-
-/* Scroll del chat */
+/* Estilos de scrollbar para el chat */
 #chat-body::-webkit-scrollbar {
   width: 6px;
 }
 #chat-body::-webkit-scrollbar-track { background: #111; }
 #chat-body::-webkit-scrollbar-thumb { background: #00bfff; border-radius: 3px; }
 
-
-/* === Estilos para enlaces dentro de las tarjetas === */
+/* === Enlaces dentro de tarjetas === */
+/* Estilos para que los enlaces sean invisibles */
 .card a,
 .card a:link,
 .card a:visited,
@@ -308,6 +319,7 @@ h1 {
     color: inherit; /* mantiene el color del texto */
 }
 
+/* Contenedor de título con iconos */
 .title-container {
     display: flex;
     justify-content: center;  /* centra horizontalmente todo el contenido */
@@ -321,4 +333,3 @@ h1 {
     width: 100px;  /* tamaño proporcional al h1 */
     height: 100px;
 }
-

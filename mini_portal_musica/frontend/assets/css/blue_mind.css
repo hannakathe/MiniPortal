@@ -1,4 +1,5 @@
 /* ===== Micrositio Musical - Detalle de Canción ===== */
+/* Estilos generales de la página de detalle de canción */
 body {
     margin: 0;
     font-family: "Inter", sans-serif;
@@ -6,6 +7,7 @@ body {
     color: #fff;
 }
 
+/* Contenedores principales izquierdo y derecho */
 .proyect-left,
 .proyect-right {
     border: 1px solid #444;
@@ -15,6 +17,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
+/* Contenedor wrapper principal con layout flexible */
 .proyect-detail-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -27,11 +30,13 @@ body {
     box-sizing: border-box;
 }
 
+/* Reglas flex para todos los hijos del wrapper */
 .proyect-detail-wrapper>* {
     flex: 1 1 300px;
     max-width: 100%;
 }
 
+/* Columna izquierda - Información principal */
 .proyect-left {
     flex: 0 0 70%;
     max-width: 60%;
@@ -40,6 +45,7 @@ body {
     gap: 20px;
 }
 
+/* Imagen en columna derecha */
 .proyect-right img {
     width: 90%;
     border-radius: 10px;
@@ -47,6 +53,7 @@ body {
     align-self: center;
 }
 
+/* Estilos de información del proyecto */
 .proyect-info h1 {
     font-size: 2rem;
     margin-bottom: 15px;
@@ -58,12 +65,14 @@ body {
     margin-bottom: 15px;
 }
 
+/* Textos generales */
 .proyect-detail-wrapper p {
     line-height: 1.6;
     margin-bottom: 15px;
     color: #f5f5f5;
 }
 
+/* Columna derecha - Contenido sticky (se mantiene visible) */
 .proyect-right {
     flex: 0 0 30%;
     max-width: 40%;
@@ -74,7 +83,7 @@ body {
     top: 20px;
 }
 
-/* Responsive */
+/* Responsive - Tablets y pantallas medianas */
 @media (max-width: 900px) {
     .proyect-detail-wrapper {
         flex-wrap: wrap;
@@ -86,12 +95,13 @@ body {
         max-width: 100%;
     }
 
+    /* Ajuste de altura de video en móviles */
     #video-container iframe {
         height: 200px;
     }
 }
 
-/* Video YouTube */
+/* Contenedor de video de YouTube */
 #video-container iframe {
     width: 100%;
     height: 500px;
@@ -99,7 +109,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 }
 
-/* ==== Estilos generales ==== */
+/* ==== Estilos generales mejorados ==== */
 body {
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.6;
@@ -108,7 +118,7 @@ body {
     padding: 0;
 }
 
-/* ==== Contenedor general ==== */
+/* ==== Contenedor general mejorado ==== */
 .proyect-detail-wrapper {
     display: flex;
     gap: 40px;
@@ -116,13 +126,13 @@ body {
     padding: 40px;
 }
 
-/* ==== Columna izquierda ==== */
+/* ==== Columna izquierda mejorada ==== */
 .proyect-left {
     flex: 2;
     /* Ocupa más espacio que la derecha */
 }
 
-/* ==== Video responsivo ==== */
+/* ==== Video responsivo con relación 16:9 ==== */
 #video-container {
     position: relative;
     width: 100%;
@@ -143,7 +153,7 @@ body {
     /* Esquinas redondeadas opcionales */
 }
 
-/* ==== Texto con más espacio ==== */
+/* ==== Mejoras de espaciado en texto ==== */
 .proyect-info h2 {
     margin-top: 30px;
     margin-bottom: 15px;
@@ -156,7 +166,7 @@ body {
     text-align: justify;
 }
 
-/* ==== Columna derecha ==== */
+/* ==== Columna derecha mejorada ==== */
 .proyect-right {
     flex: 1;
     text-align: center;
@@ -178,7 +188,8 @@ body {
     text-align: justify;
 }
 
-/* ===== GitHub Link ===== */
+/* ===== Enlace de GitHub ===== */
+/* Contenedor del enlace a GitHub */
 .github-link {
     display: flex;
     justify-content: center; /* centra horizontal */
@@ -186,7 +197,7 @@ body {
     gap: 18px;
 }
 
-
+/* Estilos del ícono de GitHub */
 .github-link a img {
     align-items: center;
     width: 60px;
@@ -206,10 +217,9 @@ body {
     margin: 0;
 }
 
-
+/* Efecto hover en el ícono de GitHub */
 .github-link a:hover img {
     transform: scale(1.2);
     filter: none;
     /* muestra el color original del icono */
 }
-

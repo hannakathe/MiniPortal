@@ -3,34 +3,44 @@
 /* ------------------ */
 #projects {
     min-height: 100vh;
-    font-family: "Inter", sans-serif; /* Fuente global para la sección */
+    font-family: "Inter", sans-serif;
+    /* Fuente global para la sección */
 }
 
 /* Título de la sección */
 #projects h3 {
     font-family: "Inter", sans-serif;
     font-size: 2rem;
-    margin:auto;
+    margin: auto;
     text-align: center;
 }
+
 #projects h1 {
     font-family: "Inter", sans-serif;
     font-size: 5rem;
     margin-bottom: 100px;
     padding-top: 70px;
-    text-align: center;        /* texto centrado */
-    position: relative;        /* referencia para ::after */
-    display: inline-block;     /* ajusta ancho al texto */
-    left: 50%;                 /* lo mandamos al centro */
-    transform: translateX(-50%); /* lo centramos bien */
+    text-align: center;
+    /* texto centrado */
+    position: relative;
+    /* referencia para ::after */
+    display: inline-block;
+    /* ajusta ancho al texto */
+    left: 50%;
+    /* lo mandamos al centro */
+    transform: translateX(-50%);
+    /* lo centramos bien */
 }
 
 #projects h1::after {
     content: "";
     position: absolute;
-    bottom: -10px;             /* separación del texto */
-    left: 0;                   /* empieza desde la izquierda del texto */
-    width: 50%;                /* llega hasta la mitad del texto */
+    bottom: -10px;
+    /* separación del texto */
+    left: 0;
+    /* empieza desde la izquierda del texto */
+    width: 50%;
+    /* llega hasta la mitad del texto */
     height: 2px;
     background-color: white;
     border-radius: 2px;
@@ -44,9 +54,12 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    flex-wrap: nowrap; /* mantener las tarjetas en una fila */
-    gap: 60px; /* aumento de la separación horizontal */
-    max-width: 1800px; /* suficiente espacio para 3 tarjetas de 500px + gaps */
+    flex-wrap: nowrap;
+    /* mantener las tarjetas en una fila */
+    gap: 60px;
+    /* aumento de la separación horizontal */
+    max-width: 1800px;
+    /* suficiente espacio para 3 tarjetas de 500px + gaps */
     margin: 0 auto;
 }
 
@@ -54,8 +67,10 @@
 /* Tarjeta */
 .card {
     position: relative;
-    width: 350px;   /* antes 500px */
-    height: 350px;  /* antes 500px */
+    width: 350px;
+    /* antes 500px */
+    height: 350px;
+    /* antes 500px */
     border-radius: 12px;
     overflow: hidden;
     background-color: var(--card-bg, #fff);
@@ -68,7 +83,8 @@
 /* Responsive para pantallas más pequeñas */
 @media (max-width: 1600px) {
     .cards {
-        flex-wrap: wrap; /* permiten bajar tarjetas si no caben */
+        flex-wrap: wrap;
+        /* permiten bajar tarjetas si no caben */
         justify-content: center;
         gap: 30px;
     }
@@ -76,14 +92,17 @@
 
 @media (max-width: 1024px) {
     .card {
-        width: 45%; /* se ajusta el ancho para tablets */
-        height: auto; /* altura automática para mantener proporción */
+        width: 45%;
+        /* se ajusta el ancho para tablets */
+        height: auto;
+        /* altura automática para mantener proporción */
     }
 }
 
 @media (max-width: 768px) {
     .card {
-        width: 90%; /* tarjetas casi de ancho completo en móviles */
+        width: 90%;
+        /* tarjetas casi de ancho completo en móviles */
         height: auto;
     }
 }
@@ -170,7 +189,8 @@
 
 /* Hover efecto: la imagen principal desaparece */
 .card:hover .card__img {
-    opacity: 0; /* Oculta la imagen principal */
+    opacity: 0;
+    /* Oculta la imagen principal */
     transition: opacity 0.3s ease;
 }
 
@@ -186,6 +206,7 @@
     .cards {
         gap: 20px;
     }
+
     .card {
         width: 45%;
     }
@@ -195,10 +216,12 @@
     #projects {
         padding: 50px 20px;
     }
+
     .cards {
         flex-direction: column;
         align-items: center;
     }
+
     .card {
         width: 90%;
     }
@@ -206,7 +229,8 @@
 
 /* Hover efecto: la imagen principal desaparece */
 .card:hover .card__img {
-    opacity: 0; /* Oculta la imagen principal */
+    opacity: 0;
+    /* Oculta la imagen principal */
     transition: opacity 0.3s ease;
 }
 

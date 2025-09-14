@@ -1,7 +1,8 @@
 /* ------------------ */
-/* Home / section     */
+/* Home / Hero Section */
 /* ------------------ */
 
+/* Sección principal de inicio/Hero */
 section#home {
     display: flex;              /* imagen a la izquierda, texto a la derecha */
     flex-direction: row;
@@ -11,7 +12,7 @@ section#home {
     margin: 0;
 }
 
-/* Imagen */
+/* Imagen de fondo con efecto de degradado */
 section#home img {
     flex: 1;
     width: 100%;
@@ -23,6 +24,7 @@ section#home img {
     align-self: start;
     display: block;
 
+    /* Efecto de máscara con degradado para transición suave */
     -webkit-mask-image: linear-gradient(to right, 
                                         rgba(0,0,0,1) 40%, 
                                         rgba(0,0,0,0.8) 60%, 
@@ -42,14 +44,14 @@ section#home img {
     mask-size: cover;
 }
 
-/* Contenedor de texto */
+/* Contenedor de texto del hero */
 section#home .home-text {
     flex: 1;
     margin: 0 80px;   /* 👈 margen lateral para que no quede pegado */
     color: #fff;
 }
 
-/* Títulos */
+/* Títulos principales */
 section#home h1 {
     font-family: "Inter", sans-serif;
     font-size: 7rem;
@@ -68,15 +70,17 @@ section#home h2 {
 /* Animación nombre   */
 /* ------------------ */
 
+/* Contenedor para nombre con animación */
 .name {
     position: relative;
     display: inline-block;
 }
 
+/* ------------------ */
+/* Botones de acción  */
+/* ------------------ */
 
-
-
-/* Botones */
+/* Contenedor de botones */
 section#home .buttons {
     margin-top: 20px;
     display: flex;
@@ -85,6 +89,7 @@ section#home .buttons {
     gap: 15px;
 }
 
+/* Estilos base para botones */
 button, .btn {
     padding: 10px 25px;
     border: none;
@@ -94,6 +99,7 @@ button, .btn {
     border-radius: 5px;
 }
 
+/* Botón principal (Explore) */
 button.explore {
     background-color: #fff;
     color: #000;
@@ -104,6 +110,7 @@ button.explore:hover {
     color: #fff;
 }
 
+/* Botón secundario (Play) */
 button.play {
     background-color: transparent;
     color: #fff;
@@ -116,15 +123,19 @@ button.play:hover {
 }
 
 /* ------------------ */
-/* Responsive ajustes */
+/* Responsive Design  */
 /* ------------------ */
+
+/* Tablets y pantallas medianas */
 @media (max-width: 1024px) {
     section#home h1 { font-size: 5rem; }
     section#home h2 { font-size: 1.6rem; }
     section#home .home-text { margin: 0 40px; } /* margen más reducido */
 }
 
+/* Móviles y tablets pequeñas */
 @media (max-width: 768px) {
+    /* Cambio a layout de columna */
     section#home {
         flex-direction: column;
         text-align: center;
@@ -133,16 +144,19 @@ button.play:hover {
         padding: 40px 20px;
     }
 
+    /* Ajuste de imagen para móviles */
     section#home img {
         width: 80%;
         max-width: 350px;
         height: auto;
     }
 
+    /* Ajuste de márgenes */
     section#home .home-text {
         margin: 0 20px; /* margen adaptado */
     }
 
+    /* Ajuste de título principal */
     section#home h1 {
     font-family: "Inter", sans-serif;
     font-size: 7rem;
@@ -150,13 +164,9 @@ button.play:hover {
     line-height: 1.1;
     margin-top: -10px; /* 👈 lo sube un poco */
 }
-
-
-
-
 }
 
-/* Títulos con línea debajo */
+/* Estilo de subtítulo con línea decorativa */
 section#home h2 {
     font-family: "Inter", sans-serif;
     font-size: 2rem;
@@ -166,6 +176,7 @@ section#home h2 {
     display: inline-block; /* hace que el ancho se ajuste al texto */
 }
 
+/* Línea decorativa bajo el subtítulo */
 section#home h2::after {
     content: "";
     display: block;
@@ -176,18 +187,18 @@ section#home h2::after {
     border-radius: 2px;
 }
 
-
-
+/* Móviles pequeños */
 @media (max-width: 480px) {
     section#home h1 { font-size: 2.5rem; }
     section#home h2 { font-size: 1rem; }
 
-
+    /* Botones en columna para móviles */
     section#home .buttons {
         flex-direction: column;
         align-items: center;
     }
 
+    /* Botones de ancho completo */
     button, .btn {
         width: 100%;
         max-width: 250px;

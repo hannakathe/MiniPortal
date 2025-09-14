@@ -91,7 +91,6 @@ MiniPortal
 │  │  │  ├─ 📂css
 │  │  │  │  ├─ about_me.css
 │  │  │  │  ├─ contact.css
-│  │  │  │  ├─ content_skills.css
 │  │  │  │  ├─ home.css
 │  │  │  │  ├─ micrositio_musical.css
 │  │  │  │  ├─ projects.css
@@ -123,7 +122,6 @@ MiniPortal
 │  │  │  └─ 📂pages
 │  │  │     ├─ about_me.html
 │  │  │     ├─ contact.html
-│  │  │     ├─ content_skills.html
 │  │  │     ├─ home.html
 │  │  │     ├─ projects_intro.html
 │  │  │     └─ skills.html
