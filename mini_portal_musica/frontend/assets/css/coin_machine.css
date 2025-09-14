@@ -180,6 +180,7 @@ body {
 
 /* ===== GitHub Link ===== */
 .github-link {
+    margin: 3% auto;
     display: flex;
     justify-content: center; /* centra horizontal */
     align-items: center;     /* centra vertical */
@@ -212,29 +213,4 @@ body {
     filter: none;
     /* muestra el color original del icono */
 }
-.carousel {
-    position: relative;
-    width: 100%;
-    max-width: 400px; /* ajusta según necesites */
-    margin: 20px auto;
-    overflow: hidden;
-    border-radius: 12px;
-}
-
-.carousel-item {
-    display: none;
-    text-align: center;
-}
-
-.carousel-item.active {
-    display: block;
-}
-
-.carousel-item img,
-.carousel-item video {
-    width: 100%;
-    height: auto;
-    border-radius: 12px;
-}
-
 

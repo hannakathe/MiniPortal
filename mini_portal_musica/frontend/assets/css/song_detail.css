@@ -95,13 +95,13 @@ body {
     box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-/* ===== Botones Modernos ===== */
+/* ===== Botones Modernos con Gradiente solo en hover ===== */
 #btn-map, #btn-lyrics, .lyrics-button {
     display: inline-block;
     margin-top: 15px;
     padding: 10px 20px;
-    background: transparent;
-    color: #fff;
+    background: transparent;      /* Sin fondo inicial */
+    color: #fff;                  /* Texto blanco */
     border: none;
     border-radius: 8px;
     font-size: 1rem;
@@ -115,6 +115,7 @@ body {
     text-decoration: none;
 }
 
+/* Pseudo-elemento para el gradiente */
 #btn-map::before, #btn-lyrics::before, .lyrics-button::before {
     content: '';
     position: absolute;
@@ -122,18 +123,25 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: #4900cf;
+    background: linear-gradient(90deg, hsla(245, 100%, 55%, 1) 0%, hsla(294, 100%, 55%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(245, 100%, 55%, 1) 0%, hsla(294, 100%, 55%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(245, 100%, 55%, 1) 0%, hsla(294, 100%, 55%, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#2D1AFF", endColorstr="#e81cff", GradientType=1);
     z-index: -1;
     transition: all 0.4s ease;
+    border-radius: 8px;
 }
 
+/* Hover: gradiente de izquierda a derecha */
 #btn-map:hover::before, #btn-lyrics:hover::before, .lyrics-button:hover::before {
     left: 0;
 }
 
+/* Mantener el texto visible sobre el gradiente */
 #btn-map:hover, #btn-lyrics:hover, .lyrics-button:hover {
     color: #fff;
 }
+
 
 /* Modal mapa */
 #map-modal {
@@ -199,115 +207,3 @@ body {
   background-color: #009acd;
 }
 
-/* ===== Chat flotante ===== 
-#chat-icon {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  cursor: pointer;
-  z-index: 3000;
-  transition: transform 0.3s ease;
-  margin: 1% 2%;
-}
-
-#chat-icon:hover {
-  transform: scale(1.1);
-}
-
-#chat-float.minimized {
-  display: none;
-}
-
-#chat-float {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  max-width: 300px;
-  max-height: 450px;
-  border-radius: 15px;
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.7);
-  display: flex;
-  flex-direction: column;
-  margin: 1% 2%;
-  overflow: hidden;
-  z-index: 2000;
-  font-family: 'Segoe UI', sans-serif;
-}
-
-#chat-header {
-  background: #111;
-  padding: 12px;
-  font-weight: bold;
-  text-align: center;
-  cursor: pointer;
-  color: #00bfff;
-  font-size: 1rem;
-}
-
-#chat-body {
-  flex: 1;
-  padding: 12px;
-  overflow-y: auto;
-  background: #1a1a1a;
-  color: #fff;
-  font-size: 0.9rem;
-}
-
-#chat-body p.user {
-  text-align: right;
-  color: #00bfff;
-  background: rgba(0, 191, 255, 0.1);
-  padding: 6px 10px;
-  border-radius: 12px;
-  display: inline-block;
-  max-width: 80%;
-}
-
-#chat-body p.bot {
-  text-align: left;
-  color: #fff;
-  background: rgba(0, 191, 255, 0.2);
-  padding: 6px 10px;
-  border-radius: 12px;
-  display: inline-block;
-  max-width: 80%;
-}
-
-#chat-form {
-  display: flex;
-  border-top: 1px solid rgba(255,255,255,0.2);
-  background: #111;
-}
-
-#chat-input {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  outline: none;
-  background: #1a1a1a;
-  color: #fff;
-  font-size: 0.95rem;
-}
-
-#chat-form button {
-  background: #00bfff;
-  border: none;
-  padding: 0 18px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #fff;
-  transition: background 0.2s ease;
-}
-
-#chat-form button:hover {
-  background: #009acd;
-}
-
-/* Scroll del chat 
-#chat-body::-webkit-scrollbar {
-  width: 6px;
-}
-#chat-body::-webkit-scrollbar-track { background: #111; }
-#chat-body::-webkit-scrollbar-thumb { background: #00bfff; border-radius: 3px; }*/
