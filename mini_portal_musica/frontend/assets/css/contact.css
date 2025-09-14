@@ -17,6 +17,7 @@
   text-align: center;  /* texto centrado */
   position: relative;
   display: inline-block; /* importante para que la línea siga al ancho del texto */
+  padding: 90px;
 }
 
 #contact h1::after {
