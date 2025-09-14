@@ -51,15 +51,19 @@
     </div>
   </div>
 
-  <!-- Chat flotante -->
-  <div id="chat-float">
-    <div id="chat-header">🎵 Music Chat</div>
-    <div id="chat-body"></div>
-    <form id="chat-form">
-      <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." required>
-      <button type="submit">Enviar</button>
-    </form>
-  </div>
+  <!-- Ícono flotante para abrir/cerrar chat -->
+<img id="chat-icon" src="../assets/icons/robot_mensaje_96.png" alt="Abrir chat">
+
+<!-- Chat flotante existente -->
+<div id="chat-float" class="minimized">
+  <div id="chat-header">🎵 Music Chat 🎵</div>
+  <div id="chat-body"></div>
+  <form id="chat-form">
+    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." required>
+    <button type="submit">Enviar</button>
+  </form>
+</div>
+
 
   <script src="../assets/js/micrositio_musical.js" defer></script>
 </body>

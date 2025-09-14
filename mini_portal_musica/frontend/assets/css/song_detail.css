@@ -7,35 +7,32 @@ body {
 }
 
 .song-left, .song-right {
-    border: 1px solid #444;      /* Borde gris oscuro */
-    border-radius: 10px;         /* Bordes redondeados */
-    padding: 20px;               /* Margen interno */
-    background: #2b2b2b;         /* Fondo ligeramente más oscuro que body */
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Sombra sutil */
+    border: 1px solid #444;
+    border-radius: 10px;
+    padding: 20px;
+    background: #2b2b2b;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
 
 .song-detail-wrapper {
     display: flex;
-    flex-wrap: wrap;          /* Permite que los elementos se apilen en pantallas pequeñas */
+    flex-wrap: wrap;
     gap: 60px;
-    width: 100%;              /* Ocupa todo el ancho disponible */
-    max-width: 100vw;         /* Nunca más ancho que la ventana */
-    margin: 1% 1%;           /* Centrado horizontal */
+    width: 100%;
+    max-width: 100vw;
+    margin: 1% 1%;
     padding: 20px;
-    overflow-x: hidden;       /* Evita scroll horizontal */
-    box-sizing: border-box;   /* Asegura que padding no aumente el ancho total */
+    overflow-x: hidden;
+    box-sizing: border-box;
 }
 
-/* Opcional: forzar que los hijos no sobrepasen el contenedor */
 .song-detail-wrapper > * {
-    flex: 1 1 300px;          /* Crecen, encogen y mínimo ancho 300px */
-    max-width: 100%;           /* Nunca sobrepasa el contenedor */
+    flex: 1 1 300px;
+    max-width: 100%;
 }
-
-
 
 .song-left {
-    flex: 0 0 70%; /* fijo 70% */
+    flex: 0 0 70%;
     max-width: 60%;
     display: flex;
     flex-direction: column;
@@ -61,14 +58,13 @@ body {
 }
 
 .song-detail-wrapper p {
-    line-height: 1.6;   /* espacio entre líneas */
-    margin-bottom: 15px; /* espacio debajo de cada párrafo */
-    color: #f5f5f5;      /* opcional: color del texto */
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #f5f5f5;
 }
 
-
 .song-right {
-    flex: 0 0 30%; /* fijo 30% */
+    flex: 0 0 30%;
     max-width: 40%;
     display: flex;
     flex-direction: column;
@@ -77,7 +73,7 @@ body {
     top: 20px;
 }
 
-/* Responsive: apilan solo en mobile */
+/* Responsive */
 @media (max-width: 900px) {
     .song-detail-wrapper {
         flex-wrap: wrap;
@@ -86,7 +82,11 @@ body {
         flex: 1 1 100%;
         max-width: 100%;
     }
+    #video-container iframe {
+        height: 200px;
+    }
 }
+
 /* Video YouTube */
 #video-container iframe {
     width: 100%;
@@ -96,7 +96,7 @@ body {
 }
 
 /* ===== Botones Modernos ===== */
-#btn-map, .lyrics-button {
+#btn-map, #btn-lyrics, .lyrics-button {
     display: inline-block;
     margin-top: 15px;
     padding: 10px 20px;
@@ -115,8 +115,7 @@ body {
     text-decoration: none;
 }
 
-/* Efecto relleno */
-#btn-map::before, .lyrics-button::before {
+#btn-map::before, #btn-lyrics::before, .lyrics-button::before {
     content: '';
     position: absolute;
     top: 0;
@@ -128,54 +127,11 @@ body {
     transition: all 0.4s ease;
 }
 
-#btn-map:hover::before, .lyrics-button:hover::before {
+#btn-map:hover::before, #btn-lyrics:hover::before, .lyrics-button:hover::before {
     left: 0;
 }
 
-#btn-map:hover, .lyrics-button:hover {
-    color: #fff;
-}
-
-
-
-/* ===== Botones Modernos Lyrics===== */
-#btn-lyrics, .lyrics-button {
-    display: inline-block;
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: transparent;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 600;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: color 0.3s ease;
-    text-align: center;
-    text-decoration: none;
-}
-
-/* Efecto relleno */
-#btn-lyrics::before, .lyrics-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: #4900cf;
-    z-index: -1;
-    transition: all 0.4s ease;
-}
-
-#btn-lyrics:hover::before, .lyrics-button:hover::before {
-    left: 0;
-}
-
-#btn-lyrics:hover, .lyrics-button:hover {
+#btn-map:hover, #btn-lyrics:hover, .lyrics-button:hover {
     color: #fff;
 }
 
@@ -217,22 +173,11 @@ body {
     font-size:20px;
 }
 
-/* Responsive */
-@media (max-width: 900px) {
-    .song-left, .song-right {
-        flex: 1 1 100%;
-    }
-    #video-container iframe {
-        height: 200px;
-    }
-}
-
-
-
+/* Grupo de botones Ver Mapa y Ver Letras */
 .button-group {
   display: flex;
-  gap: 50px; /* espacio entre botones */
-  margin-bottom: 15px; /* espacio debajo del grupo de botones */
+  gap: 50px;
+  margin-bottom: 15px;
   align-self: center;
 }
 
@@ -254,12 +199,30 @@ body {
   background-color: #009acd;
 }
 
-
 /* ===== Chat flotante ===== */
+#chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  z-index: 3000;
+  transition: transform 0.3s ease;
+  margin: 1% 2%;
+}
+
+#chat-icon:hover {
+  transform: scale(1.1);
+}
+
+#chat-float.minimized {
+  display: none;
+}
+
 #chat-float {
   position: fixed;
   bottom: 20px;
-  margin: 1% 2%;
   right: 20px;
   max-width: 300px;
   max-height: 450px;
@@ -267,6 +230,7 @@ body {
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.7);
   display: flex;
   flex-direction: column;
+  margin: 1% 2%;
   overflow: hidden;
   z-index: 2000;
   font-family: 'Segoe UI', sans-serif;

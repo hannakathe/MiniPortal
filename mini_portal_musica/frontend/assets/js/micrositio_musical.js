@@ -7,10 +7,13 @@ document.addEventListener("DOMContentLoaded", async () => {
     const chatForm = document.getElementById('chat-form');
     const chatInput = document.getElementById('chat-input');
     const chatBody = document.getElementById('chat-body');
+    const chatFloat = document.getElementById('chat-float');
+    const chatIcon = document.getElementById('chat-icon');
 
     function initChat() {
         if (!chatForm) return;
 
+        // Enviar mensaje
         chatForm.addEventListener('submit', async e => {
             e.preventDefault();
             const message = chatInput.value.trim();
@@ -52,10 +55,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
         });
 
-        const chatHeader = document.getElementById('chat-header');
-        if(chatHeader){
-            chatHeader.addEventListener('click', () => {
-                document.getElementById('chat-float').classList.toggle('minimized');
+        // Abrir chat desde icono
+        if(chatIcon && chatFloat){
+            chatIcon.addEventListener("click", () => {
+                chatFloat.classList.remove("minimized"); // Mostrar chat
+                chatIcon.style.display = "none"; // Ocultar icono
+            });
+
+            // Minimizar chat desde header
+            const chatHeader = document.getElementById("chat-header");
+            if(chatHeader){
+                chatHeader.addEventListener("click", () => {
+                    chatFloat.classList.add("minimized"); // Minimizar chat
+                    chatIcon.style.display = "block"; // Volver a mostrar icono
+                });
+            }
+
+            // Minimizar al hacer click fuera del chat
+            document.addEventListener("click", (e) => {
+                if(chatFloat && !chatFloat.contains(e.target) && e.target !== chatIcon){
+                    chatFloat.classList.add("minimized");
+                    chatIcon.style.display = "block";
+                }
             });
         }
     }
@@ -94,7 +115,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     async function loadSongDetail(id) {
         if (!id) return;
 
-        // Elementos del detalle
         const albumImage = document.getElementById("album-image");
         const songTitle = document.getElementById("song-title");
         const songArtist = document.getElementById("song-artist");
@@ -117,7 +137,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             const response = await fetch(`http://127.0.0.1:8000/api/songs/${id}`);
             const song = await response.json();
 
-            // Actualizar información
             if(albumImage) albumImage.src = song.album_image || '../assets/img/coin_machine1.jpg';
             if(albumImage) albumImage.alt = song.title || 'Álbum';
             if(songTitle) songTitle.textContent = song.title || 'Desconocido';
@@ -129,7 +148,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             if(songReleaseDate) songReleaseDate.textContent = song.release_date || 'Desconocida';
             if(songDescription) songDescription.textContent = song.description || '';
 
-            // Video YouTube
             if (videoContainer) {
                 if (song.url_video && song.url_video.trim().length === 11) {
                     videoContainer.innerHTML = `
@@ -142,7 +160,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
 
-            // Botón letras
             if (btnLyrics) {
                 if (song.lyrics && song.lyrics.trim() !== '') {
                     btnLyrics.href = song.lyrics;
@@ -151,7 +168,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
             }
 
-            // Botón mapa
             if (btnMap) {
                 btnMap.addEventListener("click", () => {
                     if (song.country_latitude && song.country_longitude) {
@@ -185,7 +201,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     }
 
-    // === Inicializar según la página ===
     if(songId) {
         loadSongDetail(songId); // song_detail.html
     } else {

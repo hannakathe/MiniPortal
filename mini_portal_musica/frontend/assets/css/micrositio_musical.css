@@ -141,29 +141,51 @@ h1 {
   }
 }
 
-/* === Chat flotante === */
+/* ===== Icono de chat ===== */
+#chat-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  z-index: 3000;
+  transition: transform 0.3s ease;
+  margin: 1% 2%;
+}
+
+#chat-icon:hover {
+  transform: scale(1.1);
+}
+
+/* ===== Chat flotante ===== */
+#chat-float.minimized {
+  display: none;
+}
+
 #chat-float {
   position: fixed;
   bottom: 20px;
   right: 20px;
-  max-width: 300px;      /* ligeramente más ancho */
-  max-height: 450px; /* un poco más alto */
+  max-width: 300px;
+  max-height: 450px;
   border-radius: 15px;
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.7);
   display: flex;
   flex-direction: column;
+  margin: 1% 2%;
   overflow: hidden;
   z-index: 2000;
   font-family: 'Segoe UI', sans-serif;
 }
 
 #chat-header {
-  background: #111111; /* negro oscuro */
+  background: #111;
   padding: 12px;
   font-weight: bold;
   text-align: center;
   cursor: pointer;
-  color: #00bfff; /* azul para el encabezado */
+  color: #00bfff;
   font-size: 1rem;
 }
 
@@ -171,20 +193,14 @@ h1 {
   flex: 1;
   padding: 12px;
   overflow-y: auto;
-  background: #1a1a1a; /* negro medio para el área de mensajes */
-  color: #ffffff;
+  background: #1a1a1a;
+  color: #fff;
   font-size: 0.9rem;
-}
-
-#chat-body p {
-  margin-bottom: 10px;
-  color: #ffffff;
-  word-wrap: break-word;
 }
 
 #chat-body p.user {
   text-align: right;
-  color: #00bfff; /* azul para los mensajes del usuario */
+  color: #00bfff;
   background: rgba(0, 191, 255, 0.1);
   padding: 6px 10px;
   border-radius: 12px;
@@ -194,8 +210,8 @@ h1 {
 
 #chat-body p.bot {
   text-align: left;
-  color: #ffffff; /* texto blanco para el bot */
-  background: rgba(0, 191, 255, 0.2); /* azul tenue para mensajes del bot */
+  color: #fff;
+  background: rgba(0, 191, 255, 0.2);
   padding: 6px 10px;
   border-radius: 12px;
   display: inline-block;
@@ -205,7 +221,7 @@ h1 {
 #chat-form {
   display: flex;
   border-top: 1px solid rgba(255,255,255,0.2);
-  background: #111111; /* negro para el footer */
+  background: #111;
 }
 
 #chat-input {
@@ -213,13 +229,13 @@ h1 {
   padding: 10px;
   border: none;
   outline: none;
-  background: #1a1a1a; /* negro medio */
-  color: #ffffff;      /* letras blancas */
+  background: #1a1a1a;
+  color: #fff;
   font-size: 0.95rem;
 }
 
 #chat-form button {
-  background: #00bfff; /* azul para el botón */
+  background: #00bfff;
   border: none;
   padding: 0 18px;
   cursor: pointer;
@@ -229,22 +245,18 @@ h1 {
 }
 
 #chat-form button:hover {
-  background: #009acd; /* azul más oscuro al pasar el cursor */
+  background: #009acd;
 }
 
 /* Scroll del chat */
 #chat-body::-webkit-scrollbar {
   width: 6px;
 }
+#chat-body::-webkit-scrollbar-track { background: #111; }
+#chat-body::-webkit-scrollbar-thumb { background: #00bfff; border-radius: 3px; }
 
-#chat-body::-webkit-scrollbar-track {
-  background: #111;
-}
 
-#chat-body::-webkit-scrollbar-thumb {
-  background: #00bfff;
-  border-radius: 3px;
-}
+/* === Estilos para enlaces dentro de las tarjetas === */
 .card a,
 .card a:link,
 .card a:visited,
