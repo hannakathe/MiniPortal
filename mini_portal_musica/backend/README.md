@@ -6,28 +6,29 @@ Este backend está desarrollado con **FastAPI**, **SQLAlchemy** y **SQLite**, y 
 
 ## Estructura del proyecto (backend)
 ```
-mini_portal_musica
-├── .gitignore
-├── 📂backend
-│   ├── 📜README.md
-│   ├── 📂app
+backend
+├── .env
+├── README.md
+├── 📂app
+│   ├── __pycache__
+│   ├── crud.py
+│   ├── database.py
+│   ├── database_contact.py
+│   ├── main.py
+│   ├── models.py
+│   ├── models_contact.py
+│   ├── 📂routers
 │   │   ├── __pycache__
-│   │   ├── crud.py
-│   │   ├── database.py
-│   │   ├── main.py
-│   │   ├── models.py
-│   │   ├── 📂routers
-│   │   │   ├── __pycache__
-│   │   │   ├── contact.py
-│   │   │   ├── profile.py
-│   │   │   ├── recommendations.py
-│   │   │   └── songs.py
-│   │   ├── schemas.py
-│   │   ├── seed.py
-│   │   └── 📂utils
-│   │       ├── __pycache__
-│   │       └── recommender.py
-│   └── songs.db
+│   │   ├── contact.py
+│   │   ├── recommendations.py
+│   │   └── songs.py
+│   ├── schemas.py
+│   ├── seed.py
+│   └── 📂utils
+│       ├── __pycache__
+│       └── recommender.py
+├── contact.db
+└── songs.db
 
 ```
 
