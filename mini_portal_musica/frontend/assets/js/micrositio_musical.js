@@ -35,7 +35,11 @@ document.addEventListener("DOMContentLoaded", async () => {
                 // Enviar mensaje a la API para obtener recomendaciones
                 const formData = new FormData();
                 formData.append('message', message);
-                const response = await fetch('http://127.0.0.1:8000/api/recommendations/chat-recommendations', { method: 'POST', body: formData });
+                const response = await fetch("https://music-portal-c3c4.onrender.com/api/recommendations/chat-recommendations", {
+                    method: "POST",
+                    body: formData
+                });
+
                 const data = await response.json();
 
                 // Crear mensaje del bot
@@ -81,7 +85,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
 
         // Abrir chat desde icono flotante
-        if(chatIcon && chatFloat){
+        if (chatIcon && chatFloat) {
             chatIcon.addEventListener("click", () => {
                 chatFloat.classList.remove("minimized"); // Mostrar chat
                 chatIcon.style.display = "none"; // Ocultar icono
@@ -89,7 +93,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // Minimizar chat desde header
             const chatHeader = document.getElementById("chat-header");
-            if(chatHeader){
+            if (chatHeader) {
                 chatHeader.addEventListener("click", () => {
                     chatFloat.classList.add("minimized"); // Minimizar chat
                     chatIcon.style.display = "block"; // Volver a mostrar icono
@@ -98,7 +102,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
             // Minimizar al hacer click fuera del chat
             document.addEventListener("click", (e) => {
-                if(chatFloat && !chatFloat.contains(e.target) && e.target !== chatIcon){
+                if (chatFloat && !chatFloat.contains(e.target) && e.target !== chatIcon) {
                     chatFloat.classList.add("minimized");
                     chatIcon.style.display = "block";
                 }
@@ -113,7 +117,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!cardsContainer) return;
 
         try {
-            const response = await fetch('http://127.0.0.1:8000/api/songs/');
+            const response = await fetch("https://music-portal-c3c4.onrender.com/api/songs/");
             const songs = await response.json();
 
             if (!Array.isArray(songs)) return;
@@ -161,20 +165,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         let songMap;
 
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/songs/${id}`);
+            const response = await fetch(`https://music-portal-c3c4.onrender.com/api/songs/${id}`);
             const song = await response.json();
 
             // Mostrar datos de la canción en el DOM
-            if(albumImage) albumImage.src = song.album_image || '../assets/img/coin_machine1.jpg';
-            if(albumImage) albumImage.alt = song.title || 'Álbum';
-            if(songTitle) songTitle.textContent = song.title || 'Desconocido';
-            if(songArtist) songArtist.textContent = song.artist || 'Desconocido';
-            if(songGenre) songGenre.textContent = song.genre || 'Desconocido';
-            if(songDiscografic) songDiscografic.textContent = song.discografic || 'Desconocido';
-            if(songAlbum) songAlbum.textContent = song.album || 'Desconocido';
-            if(songCountry) songCountry.textContent = song.country || 'Desconocido';
-            if(songReleaseDate) songReleaseDate.textContent = song.release_date || 'Desconocida';
-            if(songDescription) songDescription.textContent = song.description || '';
+            if (albumImage) albumImage.src = song.album_image || '../assets/img/coin_machine1.jpg';
+            if (albumImage) albumImage.alt = song.title || 'Álbum';
+            if (songTitle) songTitle.textContent = song.title || 'Desconocido';
+            if (songArtist) songArtist.textContent = song.artist || 'Desconocido';
+            if (songGenre) songGenre.textContent = song.genre || 'Desconocido';
+            if (songDiscografic) songDiscografic.textContent = song.discografic || 'Desconocido';
+            if (songAlbum) songAlbum.textContent = song.album || 'Desconocido';
+            if (songCountry) songCountry.textContent = song.country || 'Desconocido';
+            if (songReleaseDate) songReleaseDate.textContent = song.release_date || 'Desconocida';
+            if (songDescription) songDescription.textContent = song.description || '';
 
             // Mostrar video de YouTube si existe
             if (videoContainer) {
@@ -202,7 +206,7 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (btnMap) {
                 btnMap.addEventListener("click", () => {
                     if (song.country_latitude && song.country_longitude) {
-                        if(mapModal) mapModal.style.display = "flex";
+                        if (mapModal) mapModal.style.display = "flex";
 
                         // Inicializar mapa solo una vez
                         if (!songMap && songMapDiv) {
@@ -211,10 +215,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                                 attribution: '© OpenStreetMap contributors'
                             }).addTo(songMap);
                             L.marker([song.country_latitude, song.country_longitude])
-                             .addTo(songMap)
-                             .bindPopup(`<b>${song.title}</b><br>${song.artist}<br>${song.country}`)
-                             .openPopup();
-                        } else if(songMap) {
+                                .addTo(songMap)
+                                .bindPopup(`<b>${song.title}</b><br>${song.artist}<br>${song.country}`)
+                                .openPopup();
+                        } else if (songMap) {
                             songMap.setView([song.country_latitude, song.country_longitude], 4);
                         }
                     } else {
@@ -224,9 +228,9 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
             // Cerrar modal de mapa
-            if(closeMap && mapModal){
+            if (closeMap && mapModal) {
                 closeMap.addEventListener("click", () => mapModal.style.display = "none");
-                mapModal.addEventListener("click", (e) => { if(e.target === mapModal) mapModal.style.display = "none"; });
+                mapModal.addEventListener("click", (e) => { if (e.target === mapModal) mapModal.style.display = "none"; });
             }
 
         } catch (error) {
@@ -235,7 +239,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     // Dependiendo de si hay songId, cargamos detalle o catálogo
-    if(songId) {
+    if (songId) {
         loadSongDetail(songId); // song_detail.html
     } else {
         loadSongsCatalog(); // micrositio_musical.html
