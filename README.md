@@ -8,7 +8,7 @@ Este proyecto les permitirá entender la conexión real entre capas **frontend y
 
 ### IMPORTANTE EJECUTAR ENTORNO VIRTUAL: 
 
-``` source venv/Scripts/activate** ```
+``` source venv/Scripts/activate ```
 
 ### RELOAD SERVER:
 
